@@ -90,7 +90,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -104,7 +104,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -192,21 +192,21 @@
                 post-container">
 
                 <p>本文为2016年alictf中LoopAndLoop的writeup。</p>
-<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。<img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/1.png" alt="check"></p>
+<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。<img src="img/LoopAndLoop/1.png" alt="check"></p>
 <p>用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。</p>
-<p><img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/2.png" alt="2"></p>
+<p><img src="img/LoopAndLoop/2.png" alt="2"></p>
 <p>分析完程序流程后，题目的核心问题可归结为<em>s的取值</em>，分以下三种情况：</p>
 <ol>
 <li>判断何时结束（s’ = s - 1，s’ &lt;= 0）；</li>
 <li>判断是check1、check2或者check3（2 * s % 3）；</li>
 <li>确定checkX传入的s值（chec的s值即上轮checkX的s值）。</li>
 </ol>
-<p><img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/3.png" alt="1"></p>
-<p><img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/4.png" alt="2"></p>
-<p><img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/5.png" alt="3"></p>
+<p><img src="img/LoopAndLoop/3.png" alt="1"></p>
+<p><img src="img/LoopAndLoop/4.png" alt="2"></p>
+<p><img src="img/LoopAndLoop/5.png" alt="3"></p>
 <p>关于s的取值范围我通过动态调试得到s’取值[0,98]，（2）取值[1,99]，（3）取值[0,98]。</p>
 <p>手写几轮即发现运算规律。</p>
-<p><img src="https://github.com/g479173199/g479173199.github.io/tree/master/img/LoopAndLoop/6.png" alt="1"></p>
+<p><img src="img/LoopAndLoop/6.png" alt="1"></p>
 <p>程序运行结果是答案：236492408。</p>
 
 
