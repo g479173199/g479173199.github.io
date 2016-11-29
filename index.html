@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,31 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/11/29/writeup/">
+        <h2 class="post-title">
+            writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年alictf中LoopAndLoop的writeup。
+LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
+用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
+
+分析完程序流程后，题目的核心问题可......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-11-29
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 

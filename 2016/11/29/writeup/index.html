@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/i_dont_wanna_use_default_archives/2016/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/11/29/writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,185 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>writeup</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-11-29
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本文为2016年alictf中LoopAndLoop的writeup。</p>
+<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。<img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\file\check.png" alt="check"></p>
+<p>用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。</p>
+<p><img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\截图\1\2.png" alt="2"></p>
+<p>分析完程序流程后，题目的核心问题可归结为<em>s的取值</em>，分以下三种情况：</p>
+<ol>
+<li>判断何时结束（s’ = s - 1，s’ &lt;= 0）；</li>
+<li>判断是check1、check2或者check3（2 * s % 3）；</li>
+<li>确定checkX传入的s值（chec的s值即上轮checkX的s值）。</li>
+</ol>
+<p><img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\截图\3\1.png" alt="1"></p>
+<p><img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\截图\3\2.png" alt="2"></p>
+<p><img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\截图\3\3.png" alt="3"></p>
+<p>关于s的取值范围我通过动态调试得到s’取值[0,98]，（2）取值[1,99]，（3）取值[0,98]。</p>
+<p>手写几轮即发现运算规律。</p>
+<p><img src="C:\Users\gjm1993\Desktop\Test\CTF\Reverse\Finish\LoopAndLoop\截图\4\1.png" alt="1"></p>
+<p>程序运行结果是答案：236492408。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/11/25/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/11/29/writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/11/29/writeup/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
