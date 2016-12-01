@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -184,6 +184,32 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/">
+        <h2 class="post-title">
+            su-ctf 2016 Sharif_CTF writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年su-ctf中的Sharif_CTF的writeup。
+Sharif_CTF writeup直接使用jeb反编译，关键代码如下：
+
+Build.SERIAL用来检测程序是否在模拟器中运行，IsCorrect函数返回1则校验通过。使用IDA反汇编，结果如下：
+
+strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的ASCII码转为字符即......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-01
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
         <h2 class="post-title">
             alictf 2016 LoopAndLoop writeup
@@ -237,6 +263,8 @@ LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
+                            
+                            <a href="/tags/#CTF" title="CTF" rel="2">CTF</a>
                             
                         
                     </div>
