@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          0ctf 2016 boomshakalaka writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/i_dont_wanna_use_default_archives/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/02/0ctf-2016-boomshakalaka-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,186 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                    <h1>0ctf 2016 boomshakalaka writeup</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-12-02
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本文为2016年0ctf中boomshakalaka的writeup。</p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\0.png" alt="0"></p>
+<h1 id="boomshakalaka-writeup"><a href="#boomshakalaka-writeup" class="headerlink" title="boomshakalaka writeup"></a>boomshakalaka writeup</h1><p>直接用jeb反编译APK，反编译代码如下图：</p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\1.png" alt="1"></p>
+<p>APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的<code>YmF6aW5nYWFhYQ==</code>为base64编码。多玩几把游戏，游戏结束后的暂停期间导出文件，在Cocos2dxPrefsFile.xml中发现分数不同，字符串不同。</p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\3.png" alt="3"></p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\4.png" alt="4"></p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\9.png" alt="9"></p>
+<p>Java层没有修改文件内容，说明在so层修改。打开so，代码没混淆，函数命名应该是规范的，搜索关键词score，发现有两个函数相关。</p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\5.png" alt="5"></p>
+<p>updateScore函数中，当游戏分数达到一定的分数段，就会输出一部分base64编码后的字符串。</p>
+<p><img src="D:\Blog\source\_posts\0ctf-2016-boomshakalaka-writeup\6.png" alt="6"></p>
+<p>按分数的高低顺序将base64字符串拼起来就是flag。分数为0得到的字符串是0ctf{C0coS2d_AnDro1；在updateScore函数中得到的base64字符串是MWRfRzBtRV9Zb1VfS24w，解码后是1d_G0mE_YoU_Kn0。flag并不完整，重新看不同分数对应的字符串，发现都是以dz99结尾，拼接后解码得到flag。</p>
+<p>吐槽一下，这道题逻辑有很大问题，答案是把所有分数的字符串全部拼在一起，但是程序的实现并不是这样。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/02/2015-MSC-1-writeup/" data-toggle="tooltip" data-placement="top" title="2015 MSC_1 writeup">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/02/0ctf-2016-boomshakalaka-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/02/0ctf-2016-boomshakalaka-writeup/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
