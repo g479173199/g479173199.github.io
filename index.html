@@ -184,6 +184,33 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/02/2015-MSC-1-writeup/">
+        <h2 class="post-title">
+            2015 MSC_1 writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2015年MSC中第一题的writeup。
+MSC_1 writeup反编译后找到关键方法check。
+
+函数中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。故需忽略此类代码，定位关键代码：从函数出口位置查找函数返回值进行逆推。
+搜索 return,可以得到：
+
+在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量，而goto__2......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-02
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/">
         <h2 class="post-title">
             su-ctf 2016 Sharif_CTF writeup
@@ -264,7 +291,7 @@ LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="2">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="3">CTF</a>
                             
                         
                     </div>
