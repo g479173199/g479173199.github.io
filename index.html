@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -198,7 +198,7 @@ MSC_1 writeup反编译后找到关键方法check。
 函数中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。故需忽略此类代码，定位关键代码：从函数出口位置查找函数返回值进行逆推。
 搜索 return,可以得到：
 
-在这个goto2c7e标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量，而got......
+在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量，而goto__2......
         </div>
     </a>
     <p class="post-meta">
