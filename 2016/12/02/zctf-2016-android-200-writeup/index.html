@@ -13,11 +13,11 @@
 
     <title>
         
-          2015 MSC_1 writeup - Jieming的博客 | Jieming&#39;s Blog
+          zctf 2016 android_200 writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/02/2015-MSC-1-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/02/zctf-2016-android-200-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,7 +168,7 @@
                           <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
-                    <h1>2015 MSC_1 writeup</h1>
+                    <h1>zctf 2016 android_200 writeup</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,15 +191,28 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2015年MSC中第一题的writeup。</p>
-<h1 id="MSC-1-writeup"><a href="#MSC-1-writeup" class="headerlink" title="MSC_1 writeup"></a>MSC_1 writeup</h1><p>反编译后找到关键方法check。</p>
+                <p>本文为2016年zctf中android_200的writeup。</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。</p>
 <p><img src="1.png" alt="1"></p>
-<p>方法中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。<em>故需忽略此类代码，定位关键代码：从方法出口位置查找方法返回值进行逆推</em>。</p>
-<p>搜索 return,可以得到：</p>
-<p><img src="2.png" alt="2"></p>
-<p>在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量，而goto__2c7e就是跳转的地方，接下来搜索2c7e。</p>
+<p>进行算法还原，用户名是zctf，密码是{Notthis}。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Main &#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) throws Exception &#123;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">byte</span>[] v0 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span>];</div><div class="line">        InputStream v3 = <span class="keyword">new</span> FileInputStream(<span class="string">"C:\\Users\\gjm1993\\Desktop\\Test\\CTF\\Reverse\\Finish\\ZCTF_200\\file\\flag.bin"</span>);</div><div class="line">        <span class="built_in">do</span>&#123;</div><div class="line"></div><div class="line">        &#125;<span class="built_in">while</span>(v3.<span class="built_in">read</span>(v0) &gt; <span class="number">0</span>);</div><div class="line">        v3.<span class="built_in">close</span>();</div><div class="line">        <span class="keyword">String</span> message = <span class="keyword">new</span> <span class="keyword">String</span>(decrypt(v0,<span class="string">"zctf2016"</span>));</div><div class="line">        System.out.<span class="built_in">println</span>(message);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] decrypt(<span class="keyword">byte</span>[] src, <span class="keyword">String</span> password) throws Exception &#123;</div><div class="line">        SecureRandom v3 = <span class="keyword">new</span> SecureRandom();</div><div class="line">        SecretKey v4 = SecretKeyFactory.getInstance(<span class="string">"DES"</span>).generateSecret(<span class="keyword">new</span> DESKeySpec(password.getBytes()));</div><div class="line">        Cipher v0 = Cipher.getInstance(<span class="string">"DES/ECB/NoPadding"</span>);</div><div class="line">        v0.init(<span class="number">2</span>, v4, v3);</div><div class="line">        <span class="built_in">return</span> v0.doFinal(src);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在oncreate方法中有两部分影响程序调试，在smali中修改可以绕过。</p>
 <p><img src="3.png" alt="3"></p>
-<p>这里是正确的返回地址，在比较位下断点动态调试，输入多组不同数据发现方法是input + 124750的线性关系，key为395926。</p>
+<p>关键地方如下图所示，在sayHelloInc函数下断点进行动态调试。</p>
+<p><img src="4.png" alt="4"></p>
+<p><em>动态调试时遇到问题：静态分析时在armeabi下的so下断，动态调试出现断点处汇编代码不同（图二的断点对应图一的断点）或断点处汇编代码是DCB指令（下图三）的情况。</em></p>
+<p><strong>解决方法</strong>：把lib下的armeabi-v7a和x86都删去，只保留armeabi。</p>
+<p><img src="5.png" alt="5"></p>
+<p><img src="6.png" alt="6"></p>
+<p><img src="7.png" alt="7"></p>
+<p>分析sayHelloInc函数知{Notthis}作为DES密钥对拼接后的数据流进行解密，解密后马上释放解密后的内容。在free函数处下断点，数据存放在R0寄存器。</p>
+<p><img src="8.png" alt="8"></p>
+<p><img src="9.png" alt="9"></p>
+<p>解密后的数据太长明显不是字符串，发现是png图片（头数据89 50 4E 47 0D 0A 1A 0A 00是标准的png格式），png格式结尾是AE 42 60 82，右键存为文件。</p>
+<p><img src="10.png" alt="10"></p>
+<p><img src="11.png" alt="11"></p>
+<p>打开图片没有flag说明flag隐藏在图片中，用stegsolve查看图片中隐藏的flag。</p>
+<p><img src="12.png" alt="12"></p>
 
 
                 <hr>
@@ -208,13 +221,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/02/0ctf-2016-boomshakalaka-writeup/" data-toggle="tooltip" data-placement="top" title="0ctf 2016 boomshakalaka writeup">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/" data-toggle="tooltip" data-placement="top" title="su-ctf 2016 Sharif_CTF writeup">Next Post &rarr;</a>
+                            <a href="/2016/12/02/0ctf-2016-boomshakalaka-writeup/" data-toggle="tooltip" data-placement="top" title="0ctf 2016 boomshakalaka writeup">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -277,8 +286,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/02/2015-MSC-1-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/02/2015-MSC-1-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/02/zctf-2016-android-200-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/02/zctf-2016-android-200-writeup/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -181,6 +181,31 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/02/zctf-2016-android-200-writeup/">
+        <h2 class="post-title">
+            zctf 2016 android_200 writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年zctf中android_200的writeup。
+Writeup使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
+
+进行算法还原，用户名是zctf，密码是{Notthis}。
+123......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-02
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -316,7 +341,7 @@ LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="4">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="5">CTF</a>
                             
                         
                     </div>
