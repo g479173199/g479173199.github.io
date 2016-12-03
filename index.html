@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,32 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/03/问鼎杯-2016-android-writeup/">
+        <h2 class="post-title">
+            问鼎杯 2016 android writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年问鼎杯中android的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下：
+
+只有当输入与随机数（每隔一段时间随机数自动变换）相同时才能跳转到MainActivity。在smali中修改程序逻辑：当输入与随机数不同时进行跳转。
+
+分析MainActivity知flag会自动生成并显示在EditText中，不过setTransformatio......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-03
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -341,7 +367,7 @@ LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="5">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="6">CTF</a>
                             
                         
                     </div>
