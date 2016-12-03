@@ -192,7 +192,7 @@
                 post-container">
 
                 <p>本文为2015年MSC中第一题的writeup。</p>
-<h1 id="MSC-1-writeup"><a href="#MSC-1-writeup" class="headerlink" title="MSC_1 writeup"></a>MSC_1 writeup</h1><p>反编译后找到关键方法check。</p>
+<h1 id="MSC-1-writeup"><a href="#MSC-1-writeup" class="headerlink" title="MSC_1 writeup"></a>MSC_1 writeup</h1><p>首先<a href="/downloads/MSC_1.apk">点我</a>下载题目。反编译后找到关键方法check。</p>
 <p><img src="1.png" alt="1"></p>
 <p>方法中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。<em>故需忽略此类代码，定位关键代码：从方法出口位置查找方法返回值进行逆推</em>。</p>
 <p>搜索 return,可以得到：</p>

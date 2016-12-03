@@ -193,7 +193,7 @@
 
                 <p>本文为2016年0ctf中boomshakalaka的writeup。</p>
 <p><img src="0.png" alt="0"></p>
-<h1 id="boomshakalaka-writeup"><a href="#boomshakalaka-writeup" class="headerlink" title="boomshakalaka writeup"></a>boomshakalaka writeup</h1><p>直接用jeb反编译APK，反编译代码如下图：</p>
+<h1 id="boomshakalaka-writeup"><a href="#boomshakalaka-writeup" class="headerlink" title="boomshakalaka writeup"></a>boomshakalaka writeup</h1><p>首先<a href="/downloads/plane.apk">点我</a>下载题目。直接用jeb反编译APK，反编译代码如下图：</p>
 <p><img src="1.png" alt="1"></p>
 <p>APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的<code>YmF6aW5nYWFhYQ==</code>为base64编码。多玩几把游戏，游戏结束后的暂停期间导出文件，在Cocos2dxPrefsFile.xml中发现分数不同，字符串不同。</p>
 <p><img src="3.png" alt="3"></p>

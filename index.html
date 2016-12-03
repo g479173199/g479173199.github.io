@@ -219,10 +219,9 @@ Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下�
         </h3>
         <div class="post-content-preview">
             本文为2016年zctf中android_200的writeup。
-Writeup使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
+Writeup首先点我下载题目。使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
 
-进行算法还原，用户名是zctf，密码是{Notthis}。
-123......
+进行算法还原，用户名是zctf，密码是{Nott......
         </div>
     </a>
     <p class="post-meta">
@@ -245,9 +244,9 @@ Writeup使用jeb反编译，对username和password进行部分验证后，再将
         <div class="post-content-preview">
             本文为2016年0ctf中boomshakalaka的writeup。
 
-boomshakalaka writeup直接用jeb反编译APK，反编译代码如下图：
+boomshakalaka writeup首先点我下载题目。直接用jeb反编译APK，反编译代码如下图：
 
-APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的YmF6aW5nYWFhYQ==为base64编码。多玩几把游戏，游戏结束后的暂停期间......
+APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的YmF6aW5nYWFhYQ==为base64编码。多玩几把游戏，游......
         </div>
     </a>
     <p class="post-meta">
@@ -269,12 +268,12 @@ APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfil
         </h3>
         <div class="post-content-preview">
             本文为2015年MSC中第一题的writeup。
-MSC_1 writeup反编译后找到关键方法check。
+MSC_1 writeup首先点我下载题目。反编译后找到关键方法check。
 
 方法中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。故需忽略此类代码，定位关键代码：从方法出口位置查找方法返回值进行逆推。
 搜索 return,可以得到：
 
-在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量，而goto__2......
+在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量......
         </div>
     </a>
     <p class="post-meta">
@@ -296,11 +295,11 @@ MSC_1 writeup反编译后找到关键方法check。
         </h3>
         <div class="post-content-preview">
             本文为2016年su-ctf中的Sharif_CTF的writeup。
-Sharif_CTF writeup直接使用jeb反编译，关键代码如下：
+Sharif_CTF writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
 
 Build.SERIAL用来检测程序是否在模拟器中运行，IsCorrect函数返回1则校验通过。使用IDA反汇编，结果如下：
 
-strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的ASCII码转为字符即......
+strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的AS......
         </div>
     </a>
     <p class="post-meta">
@@ -322,10 +321,10 @@ strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻�
         </h3>
         <div class="post-content-preview">
             本文为2016年alictf中LoopAndLoop的writeup。
-LoopAndLoop writeup直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
+LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
 用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
 
-分析完程序流程后，题目的核心问题可......
+分析完程序流程后......
         </div>
     </a>
     <p class="post-meta">
