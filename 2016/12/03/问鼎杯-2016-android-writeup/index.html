@@ -192,7 +192,7 @@
                 post-container">
 
                 <p>本文为2016年问鼎杯中android的writeup。</p>
-<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/releases/CTF/Android/app-release.apk">点我</a>下载题目。直接使用jeb反编译，入口代码如下：</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="releases/tag/1.0/Android/app-release.apk">点我</a>下载题目。直接使用jeb反编译，入口代码如下：</p>
 <p><img src="0.png" alt="0"></p>
 <p>只有当输入与随机数（每隔一段时间随机数自动变换）相同时才能跳转到MainActivity。在smali中修改程序逻辑：<em>当输入与随机数不同时进行跳转</em>。</p>
 <p><img src="1.png" alt="1"></p>
