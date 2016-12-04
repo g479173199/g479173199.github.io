@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -201,7 +201,7 @@
 <p><img src="2.png" alt="2"></p>
 <p><img src="3.png" alt="3"></p>
 <p><img src="4.png" alt="4"></p>
-<p>f5失效如上图所示。通过对比动态调试和静态分析的汇编代码可知，动态调试时<code>stringFromJNI</code>没有结束地址，故f5失效。解决方法：<em>用鼠标从函数头部一直到函数结尾拖一下，变成灰色，然后按p，这样就可以f5</em>。</p>
+<p>通过对比动态调试和静态分析的汇编代码可知，动态调试时<code>stringFromJNI</code>没有结束地址，故f5失效。解决方法：<em>用鼠标从函数头部一直到函数结尾拖一下，变成灰色，然后按p，这样就可以f5</em>。</p>
 <p>由于汇编代码含有大量的无效跳转，<em>因此我们选择直接在伪代码的基础上进行动态调试，把精力放在函数对输入数据进行的处理上。同时，输入多组不同的数据来了解函数处理流程。</em></p>
 <p>首先对输入数据进行处理的地方是<code>check1</code>，根据返回值是否为1，进入不同的分支。</p>
 <p><img src="5.png" alt="5"></p>
