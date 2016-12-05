@@ -13,11 +13,11 @@
 
     <title>
         
-          lctf 2016 easy200 writeup - Jieming的博客 | Jieming&#39;s Blog
+          lctf 2016 android writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/05/lctf-2016-easy200-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/05/lctf-2016-android-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -168,7 +168,7 @@
                           <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
-                    <h1>lctf 2016 easy200 writeup</h1>
+                    <h1>lctf 2016 android writeup</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,7 +191,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年lctf中easy200的writeup。</p>
+                <p>本文为2016年lctf中android的writeup。</p>
 <h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/easy200.apk">点我</a>下载题目。直接用jeb反编译，入口代码如下：</p>
 <p><img src="0.png" alt="0"></p>
 <p>使用IDA反汇编，<em>先看<code>.init_array</code></em>。在<code>.init_array</code>中看到<code>secret</code>和<code>base</code>码（后面用到的加密算法就是<code>base64</code>算法）。<img src="1.png" alt="1"></p>
@@ -275,8 +275,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/05/lctf-2016-easy200-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/05/lctf-2016-easy200-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/05/lctf-2016-android-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/05/lctf-2016-android-writeup/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

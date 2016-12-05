@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,15 +184,15 @@
 
 <div class="post-preview">
 
-    <a href="/2016/12/05/lctf-2016-easy200-writeup/">
+    <a href="/2016/12/05/lctf-2016-android-writeup/">
         <h2 class="post-title">
-            lctf 2016 easy200 writeup
+            lctf 2016 android writeup
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            本文为2016年lctf中easy200的writeup。
+            本文为2016年lctf中android的writeup。
 Writeup首先点我下载题目。直接用jeb反编译，入口代码如下：
 
 使用IDA反汇编，先看.init_array。在.init_array中看到secret和base码（后面用到的加密算法就是base64算法）。
@@ -261,18 +261,18 @@ Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下�
 
 <div class="post-preview">
 
-    <a href="/2016/12/02/zctf-2016-android-200-writeup/">
+    <a href="/2016/12/02/zctf-2016-android-writeup/">
         <h2 class="post-title">
-            zctf 2016 android_200 writeup
+            zctf 2016 android writeup
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            本文为2016年zctf中android_200的writeup。
+            本文为2016年zctf中android的writeup。
 Writeup首先点我下载题目。使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
 
-进行算法还原，用户名是zctf，密码是{Nott......
+进行算法还原，用户名是zctf，密码是{Notthis}......
         </div>
     </a>
     <p class="post-meta">
