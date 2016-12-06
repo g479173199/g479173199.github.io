@@ -198,7 +198,7 @@
 <p>用IDA反汇编，<code>init_array</code>中有反调试函数，<code>Java_k2015_a2_Ch_ch</code>是代码入口，f5生成伪代码进行动态调试。</p>
 <p><img src="1.png" alt="1"></p>
 <p>首先给<code>key</code>初始化一个0x10的空间，并分别赋值<code>k[i] = i</code>。将输入拷贝到<code>key</code>。</p>
-<p>接下来调用<code>mprotect</code>动态解密<code>check2</code>，然后进入<code>check2</code>。继续对<code>key</code>进行变形，第一个字符对应的ASCII码加0，第二个加1， 第 3个加 2，…，第n个加n-1。</p>
+<p>接下来调用<code>mprotect</code>动态解密<code>check2</code>，然后进入<code>check2</code>。对<code>key</code>进行变形，第一个字符对应的ASCII码加0，第二个加1， 第 3个加 2，…，第n个加n-1。</p>
 <p><img src="2.png" alt="2"></p>
 <p>下一步就是解密并调用<code>check3</code>（跟上面是相同的解密和反调试手段），继续对<code>key</code>进行变形，字符串相加。<img src="3.png" alt="3"></p>
 <p>计算得到的<code>v57</code>再进行一次变换生成<code>v58</code>，最终与<code>byte_75004140</code>进行对比。</p>
