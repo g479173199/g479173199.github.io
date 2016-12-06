@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -196,17 +196,17 @@
 <p>在Java层有对APK进行签名校验，通过修改smali可以绕过。</p>
 <p>解题思路：<em>把精力放在函数对输入字符串进行的处理和比对上</em>。</p>
 <p>用IDA反汇编，<code>init_array</code>中有反调试函数，<code>Java_k2015_a2_Ch_ch</code>是代码入口，f5生成伪代码进行动态调试。</p>
-<p><img src="D:\Blog\source\_posts\2015-MSC-2-writeup\1.png" alt="1"></p>
+<p><img src="1.png" alt="1"></p>
 <p>首先给<code>key</code>初始化一个0x10的空间，并分别赋值<code>k[i] = i</code>。将输入拷贝到<code>key</code>。</p>
 <p>接下来调用<code>mprotect</code>动态解密<code>check2</code>，然后进入<code>check2</code>。继续对<code>key</code>进行变形，第一个字符对应的ASCII码加0，第二个加1， 第 3个加 2，…，第n个加n-1。</p>
-<p><img src="D:\Blog\source\_posts\2015-MSC-2-writeup\2.png" alt="2"></p>
-<p>下一步就是解密并调用<code>check3</code>（跟上面是相同的解密和反调试手段），继续对<code>key</code>进行变形，字符串相加。<img src="D:\Blog\source\_posts\2015-MSC-2-writeup\3.png" alt="3"></p>
+<p><img src="2.png" alt="2"></p>
+<p>下一步就是解密并调用<code>check3</code>（跟上面是相同的解密和反调试手段），继续对<code>key</code>进行变形，字符串相加。<img src="3.png" alt="3"></p>
 <p>计算得到的<code>v57</code>再进行一次变换生成<code>v58</code>，最终与<code>byte_75004140</code>进行对比。</p>
-<p><img src="D:\Blog\source\_posts\2015-MSC-2-writeup\4.png" alt="4"></p>
-<p><img src="D:\Blog\source\_posts\2015-MSC-2-writeup\5.png" alt="5"></p>
+<p><img src="4.png" alt="4"></p>
+<p><img src="5.png" alt="5"></p>
 <p>本题的关键在于<code>v27</code>函数。进入函数后发现进行十轮计算，而且动态调试中看到了AES加密算法的置换表。</p>
 <p>从网上查找资料发现这篇<a href="http://blog.csdn.net/chence19871/article/details/27653805" target="_blank" rel="external">文章</a>，本题是基于查表的方式实现AES加密，AES算法加密密钥：<code>6BCDC67A6B2B7C9D8DA459B1AB9D0680</code>。</p>
-<p><img src="D:\Blog\source\_posts\2015-MSC-2-writeup\6.png" alt="6"></p>
+<p><img src="6.png" alt="6"></p>
 <p>最终的答案为 kboloy0。</p>
 
 
