@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          google-ctf 2016 ill-intentions writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/i_dont_wanna_use_default_archives/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/09/google-ctf-2016-ill-intentions-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,192 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                    <h1>google-ctf 2016 ill-intentions writeup</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-12-09
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本文为2016年google-ctf中ill-intentions的writeup。</p>
+<h1 id="ill-intentions-writeup"><a href="#ill-intentions-writeup" class="headerlink" title="ill-intentions writeup"></a>ill-intentions writeup</h1><p>首先<a href="/downloads/illintentions.apk">点我</a>下载题目。直接使用jeb反编译，分析APK后觉得flag只会存在于广播的<code>msg</code>。</p>
+<p><img src="0.png" alt="0"></p>
+<p><img src="1.png" alt="1"></p>
+<p><img src="2.png" alt="2"></p>
+<p>在smali中插入Log日志，打印<code>msg</code>。</p>
+<p><img src="5.png" alt="5"></p>
+<p><img src="6.png" alt="6"></p>
+<p><img src="7.png" alt="7"></p>
+<p>对Acitivity设置<code>android:exported=&quot;true&quot;</code>属性，用命令的形式启动Activity。</p>
+<p><img src="4.png" alt="4"></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">adb shell am start -n com<span class="selector-class">.example</span><span class="selector-class">.hellojni</span>/com<span class="selector-class">.example</span><span class="selector-class">.application</span><span class="selector-class">.IsThisTheRealOne</span></div><div class="line">adb shell am start -n com<span class="selector-class">.example</span><span class="selector-class">.hellojni</span>/com<span class="selector-class">.example</span><span class="selector-class">.application</span><span class="selector-class">.ThisIsTheRealOne</span></div><div class="line">adb shell am start -n com<span class="selector-class">.example</span><span class="selector-class">.hellojni</span>/com<span class="selector-class">.example</span><span class="selector-class">.application</span><span class="selector-class">.DefinitelyNotThisOne</span></div></pre></td></tr></table></figure>
+<p>查看日志输入，<code>flag</code>是<code>CTF{IDontHaveABadjokeSorry}</code>。</p>
+<p><img src="8.png" alt="8"></p>
+<p><img src="9.png" alt="9"></p>
+<p><img src="10.png" alt="10"></p>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>在5.0以下安装APK会报错。开始的解决方法是在Manifest中加入<android:minsdkversion android:targetsdkversion="">，编译成APK后安装到4.x系统上运行，但是程序在发送广播时报错（在这上面折腾一天o(╯□╰)o，中间试了其他的解法）！</android:minsdkversion></p>
+<p>做<code>little-bobby-application</code>将手机刷到5.1版本，抱着试试的心态重做下这题发现解出来了。。。</p>
+<p>以后遇到这种问题直接把APK安装到高版本手机上。</p>
+<p><img src="3.png" alt="3"></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/06/2015-MSC-2-writeup/" data-toggle="tooltip" data-placement="top" title="2015 MSC_2 writeup">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/09/google-ctf-2016-ill-intentions-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/09/google-ctf-2016-ill-intentions-writeup/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
