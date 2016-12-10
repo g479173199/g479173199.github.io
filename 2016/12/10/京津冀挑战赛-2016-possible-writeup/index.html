@@ -192,16 +192,16 @@
                 post-container">
 
                 <p>首先<a href="/downloads/possible.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\1.png" alt="1"></p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\2.png" alt="2"></p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\3.png" alt="3"></p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\4.png" alt="4"></p>
+<p><img src="1.png" alt="1"></p>
+<p><img src="2.png" alt="2"></p>
+<p><img src="3.png" alt="3"></p>
+<p><img src="4.png" alt="4"></p>
 <p>在SO层通过反射得到num和indexArray两个数组，当符合一定条件时将answerNum设置成解密密钥，继而进行三重AES解密。<em>符合SO层条件的answerNum会有多个，但是只有一个answerNum能解密密文，其他answerNum解密密文时会报错。</em></p>
 <p>ARM子函数调用：当参数小于4个时，ARM首先会用R0-R3四个寄存器来传递参数；当参数个数大于4个时，使用栈来传递参数。函数返回值默认通过R0寄存器传递，但是不一定！具体根据ARM指令分析。</p>
 <p>伪代码显示不全，没有将返回值赋给变量，这时要看ARM指令，分析过程如下。</p>
 <p>最后可知R1寄存器存放idivmod函数的返回值。</p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\5.png" alt="5"></p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\6.png" alt="6"></p>
+<p><img src="5.png" alt="5"></p>
+<p><img src="6.png" alt="6"></p>
 <p>根据ARM指令可还原相关代码：</p>
 <pre><code>answerNum = 0;
 int i = 0;
@@ -217,7 +217,7 @@ while (i &lt; array.length) {
 }
 result = v20 % 1011;
 </code></pre><p>注意：在<code>check</code>中<code>j_j___aeabi_idivmod</code>伪代码显示错误，<code>j_j___aeabi_idivmod</code>表示取余。</p>
-<p><img src="D:\Blog\source\_posts\京津冀挑战赛-2016-possible-writeup\7.png" alt="7"></p>
+<p><img src="7.png" alt="7"></p>
 <p>AES解密是在Android环境下进行，故在Android下进行算法还原。经测试，Java下运行解密程序报错。</p>
 <p>解密程序<a href="/downloads/possible.zip">点我</a>下载。</p>
 <p>答案：38和508。</p>
