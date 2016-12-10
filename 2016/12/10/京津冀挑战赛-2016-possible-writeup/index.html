@@ -202,18 +202,18 @@
 <p><img src="5.png" alt="5"></p>
 <p><img src="6.png" alt="6"></p>
 <p>最后可知R1寄存器存放<code>idivmod</code>的返回值。根据ARM指令可还原相关代码：</p>
-<pre><code> answerNum = 0;
- int i = 0;
+<pre><code>answerNum = 0;
+int i = 0;
 int v20 = 0;
- int v15, v16, v17, result;
- while (i &lt; array.length) {
+int v15, v16, v17, result;
+while (i &lt; array.length) {
  v15 = array[i];
-i++;
-v16 = num[v15];
-    v17 = v16 % 1011;
-v20 = (v20 + v17) % 1011;
-answerNum ^= v16;
- }
+ i++;
+ v16 = num[v15];
+ v17 = v16 % 1011;
+ v20 = (v20 + v17) % 1011;
+ answerNum ^= v16;
+}
  result = v20 % 1011;
 </code></pre><p>注意：在<code>check</code>中<code>j_j___aeabi_idivmod</code>伪代码显示错误，<code>j_j___aeabi_idivmod</code>表示取余。</p>
 <p><img src="7.png" alt="7"></p>
