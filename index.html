@@ -184,6 +184,33 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/10/京津冀挑战赛-2016-possible-writeup/">
+        <h2 class="post-title">
+            京津冀挑战赛 2016 possible writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+
+
+
+在SO层通过反射得到num和indexArray两个数组，当符合一定条件时将answerNum设置成解密密钥，继而进行三重AES解密。符合SO层条件的answerNum会有多个，但是只有一个answerNum能解密密文，其他answerNum解密密文时会报错。
+ARM子函数调用：当参数小于4个时，ARM首先会用R0-R3四个寄存......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/09/google-ctf-2016-ill-intentions-writeup/">
         <h2 class="post-title">
             google-ctf 2016 ill-intentions writeup
@@ -415,37 +442,16 @@ strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
-        <h2 class="post-title">
-            alictf 2016 LoopAndLoop writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年alictf中LoopAndLoop的writeup。
-LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
-用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
-
-分析完程序流程后......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-11-29
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
 
 <ul class="pager">
     
+    
+        <li class="next">
+            <a href="/page/2/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -471,7 +477,7 @@ LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返�
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="10">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="11">CTF</a>
                             
                         
                     </div>
