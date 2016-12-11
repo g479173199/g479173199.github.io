@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -202,11 +202,11 @@
 <p><img src="5.png" alt="5"></p>
 <p>IDA反汇编so，入口函数是<code>Java_com_ssctf_seclreg_Seclo0o_getpl</code>，<code>getpl</code>中对输入的密码进行判别。</p>
 <p><img src="8.png" alt="8"></p>
-<p><img src="9.png" alt="9"></p>
 <p>解题思路：关注的重点放在对输入密码进行的处理和比较上。</p>
-<p><code>getpl</code>没有对传入的密码做任何修改，直接进行比较。定位到最后的比较语句，发现密码为39位。看ARM指令知<code>pl</code>存放在R0寄存器，<code>inputPass</code>存放在R1寄存器，IDA进行动态调试直接查看pl的值即可。</p>
+<p><code>getpl</code>没有对传入的密码做任何修改，直接进行比较。定位到最后的比较语句，如下图，发现密码为39位。看ARM指令知<code>pl</code>存放在R0寄存器，<code>inputPass</code>存放在R1寄存器，IDA进行动态调试直接查看<code>pl</code>的值即可。</p>
+<p><img src="9.png" alt="9"></p>
 <p><img src="10.png" alt="10"></p>
-<p>密码：SSCTF{oty3eaP$g986iwhw32j%OJ)g0o7J.CG:}</p>
+<p>密码：<code>SSCTF{oty3eaP$g986iwhw32j%OJ)g0o7J.CG:}</code></p>
 
 
                 <hr>

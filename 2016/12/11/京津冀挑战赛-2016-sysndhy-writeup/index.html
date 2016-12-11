@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -208,7 +208,7 @@
 <p><img src="11.png" alt="11"></p>
 <p>最后给出计算输入的程序：</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    int[] array = &#123;<span class="number">0x4B</span>, <span class="number">0x56</span>, <span class="number">0x47</span>, <span class="number">0x7B</span>, <span class="number">0x72</span>, <span class="number">0x7F</span>, <span class="number">0x4E</span>, <span class="number">0x55</span>, <span class="number">0x46</span>,<span class="number">0x6A</span>, <span class="number">0x60</span>, <span class="number">0x4A</span>, <span class="number">0x50</span>, <span class="number">0</span>, <span class="number">0x7E</span>, <span class="number">0xA</span>, <span class="number">0x65</span>, <span class="number">0x7B</span>, <span class="number">0x5B</span>, <span class="number">0x47</span>, <span class="number">0x69</span>, <span class="number">0x44</span>, <span class="number">0xE</span>, <span class="number">0xE</span>&#125;;</div><div class="line">    int tmp;</div><div class="line">    List&lt;Integer&gt; <span class="type">list</span> = new ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    for (int i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</div><div class="line">        tmp = array[i] ^ <span class="number">0x11</span>;</div><div class="line">        <span class="type">list</span>.add(tmp);</div><div class="line">    &#125;</div><div class="line">    for (int i = <span class="number">6</span>; i &lt; <span class="number">12</span>; i++) &#123;</div><div class="line">        tmp = array[i] ^ <span class="number">0x22</span>;</div><div class="line">        <span class="type">list</span>.add(tmp);</div><div class="line">    &#125;</div><div class="line">    for (int i = <span class="number">12</span>; i &lt; <span class="number">24</span>; i++) &#123;</div><div class="line">        tmp = array[i] ^ <span class="number">0x33</span>;</div><div class="line">        <span class="type">list</span>.add(tmp);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    byte []bytes = &#123;<span class="number">90</span>,<span class="number">71</span>,<span class="number">86</span>,<span class="number">106</span>,<span class="number">99</span>,<span class="number">110</span>,<span class="number">108</span>,<span class="number">119</span>,<span class="number">100</span>,<span class="number">72</span>,<span class="number">66</span>,<span class="number">104</span>,<span class="number">99</span>,<span class="number">51</span>,<span class="number">77</span>,<span class="number">57</span>,<span class="number">86</span>,<span class="number">72</span>,<span class="number">104</span>,<span class="number">116</span>,<span class="number">90</span>,<span class="number">119</span>,<span class="number">61</span>,<span class="number">61</span>&#125;;</div><div class="line">    String answer = new String(bytes);</div><div class="line">    System.out.println(answer);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答案：decryptpass=Txmg。</p>
+<p>答案：<code>decryptpass=Txmg</code>。</p>
 
 
                 <hr>
