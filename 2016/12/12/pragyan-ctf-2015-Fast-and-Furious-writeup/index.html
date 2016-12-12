@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          pragyan-ctf Fast and Furious writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/i_dont_wanna_use_default_archives/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,186 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                    <h1>pragyan-ctf Fast and Furious writeup</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-12-12
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本文为2015年pragyan-ctf中Fast and Furious的writeup。</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/fast.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
+<p><img src="1.png" alt="1"></p>
+<p>程序逻辑简单，<code>flag</code>只可能存在于①或②，首先对<code>Timer.schedule()</code>分析。</p>
+<p><img src="2.png" alt="2"></p>
+<p><img src="3.png" alt="3"></p>
+<p>运行程序发现<code>Toast.makeText()</code>的内容不断变化，并且从代码中没有看出<code>flag</code>存在的迹象。</p>
+<p>给出①的运算过程：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)&#123;</div><div class="line">    <span class="keyword">String</span> v5 = Main.a(<span class="string">"65544231587a52794d3138316458417a636c396d4e44553343673d3d"</span>);</div><div class="line">    System.out.<span class="built_in">println</span>(v5);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> a(<span class="keyword">String</span> arg4) &#123;</div><div class="line"></div><div class="line">    StringBuilder v1 = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">int</span> v0;</div><div class="line">    <span class="built_in">for</span>(v0 = <span class="number">0</span>; v0 &lt; arg4.length(); v0 += <span class="number">2</span>) &#123;</div><div class="line">        v1.append(((<span class="keyword">char</span>)Integer.<span class="built_in">parseInt</span>(arg4.substring(v0, v0 + <span class="number">2</span>), <span class="number">16</span>)));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> v1.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果是<code>eTB1XzRyM181dXAzcl9mNDU3Cg==</code>，base64解码得到<code>y0u_4r3_5up3r_f457</code>。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/12/12/lctf-2016-android100-writeup/" data-toggle="tooltip" data-placement="top" title="lctf 2016 android100 writeup">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/" data-toggle="tooltip" data-placement="top" title="ssctf 2016 Seclreg writeup">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
