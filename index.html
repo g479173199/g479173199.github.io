@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,6 +184,35 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/12/pragyan-ctf-Fast-and-Furious-writeup/">
+        <h2 class="post-title">
+            pragyan-ctf Fast and Furious writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2015年pragyan-ctf中Fast and Furious的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+程序逻辑简单，flag只可能存在于①或②，首先对Timer.schedule()分析。
+
+
+运行程序发现Toast.makeText()的内容不断变化，并且从代码中没有看出flag存在的迹象。
+给出①的运算过程：
+12345678......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-12
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/">
         <h2 class="post-title">
             ssctf 2016 Seclreg writeup
@@ -192,7 +221,8 @@
             
         </h3>
         <div class="post-content-preview">
-            首先点我下载题目。直接使用jeb反编译，关键代码如下：
+            本文为2016年ssctf中Seclreg的writeup。
+Seclreg writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
 
 
 
@@ -201,8 +231,7 @@
 getResources().getString(2131034119)是为了得到strings.xml中username字符串的值，结果是secl-007，故编号是secl-007。
 
 
-IDA反汇编so，入口函数是Java_com_ssctf_seclreg_Seclo0o_getpl，getpl中对输入的密码进行判别。
-......
+IDA反汇编so，入口函数是Java_com_......
         </div>
     </a>
     <p class="post-meta">
@@ -223,7 +252,8 @@ IDA反汇编so，入口函数是Java_com_ssctf_seclreg_Seclo0o_getpl，getpl中�
             
         </h3>
         <div class="post-content-preview">
-            首先点我下载题目。直接使用jeb反编译，关键代码如下：
+            本文为2016年京津冀挑战赛中sysndhy的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
 
 
 Base64.encode(input.getBytes())是对输入进行base64编码。
@@ -231,10 +261,7 @@ IDA反汇编so，发现check进行了加密处理。so中没有JNI_Onload，故�
 
 
 
-将init_array的code段还原成ARM指令：光标放在unk_4xxx上，按c进行还原。
-
-
-in......
+将init_array的c......
         </div>
     </a>
     <p class="post-meta">
@@ -255,13 +282,13 @@ in......
             
         </h3>
         <div class="post-content-preview">
-            首先点我下载题目。直接使用jeb反编译，关键代码如下：
+            本文为2016年京津冀挑战赛中possible的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
 
 
 
 
-在SO层通过反射得到num和indexArray两个数组，当符合一定条件时将answerNum设置成解密密钥，继而进行三重AES解密。符合SO层条件的answerNum会有多个，但是只有一个answerNum能解密密文，其他answerNum解密密文时会报错。
-ARM子函数调用：当参数小于4个时，ARM首先会用R0-R3四个寄存......
+在SO层通过反射得到num和indexArray两个数组，当符合一定条件时将answerNum设置成解密密钥，继而进行三重AES解密。符合SO层条件的answerNum会有多个，但是只有一个answerNum能解密密文，其他answerNum解密密文......
         </div>
     </a>
     <p class="post-meta">
@@ -427,31 +454,6 @@ Writeup首先点我下载题目。使用jeb反编译，对username和password进
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/02/0ctf-2016-boomshakalaka-writeup/">
-        <h2 class="post-title">
-            0ctf 2016 boomshakalaka writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年0ctf中boomshakalaka的writeup。
-
-boomshakalaka writeup首先点我下载题目。直接用jeb反编译APK，反编译代码如下图：
-
-APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的YmF6aW5nYWFhYQ==为base64编码。多玩几把游戏，游......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -487,7 +489,7 @@ APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfil
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="13">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="14">CTF</a>
                             
                         
                     </div>
