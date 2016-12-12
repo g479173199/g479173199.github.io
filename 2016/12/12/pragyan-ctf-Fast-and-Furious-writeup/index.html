@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -193,10 +193,10 @@
 
                 <p>本文为2015年pragyan-ctf中Fast and Furious的writeup。</p>
 <h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/fast.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="D:\Blog\source\_posts\pragyan-ctf-Fast-and-Furious-writeup\1.png" alt="1"></p>
+<p><img src="1.png" alt="1"></p>
 <p>程序逻辑简单，<code>flag</code>只可能存在于①或②，首先对<code>Timer.schedule()</code>分析。</p>
-<p><img src="D:\Blog\source\_posts\pragyan-ctf-Fast-and-Furious-writeup\2.png" alt="2"></p>
-<p><img src="D:\Blog\source\_posts\pragyan-ctf-Fast-and-Furious-writeup\3.png" alt="3"></p>
+<p><img src="2.png" alt="2"></p>
+<p><img src="3.png" alt="3"></p>
 <p>运行程序发现<code>Toast.makeText()</code>的内容不断变化，并且从代码中没有看出<code>flag</code>存在的迹象。</p>
 <p>给出①的运算过程：</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args)&#123;</div><div class="line">    <span class="keyword">String</span> v5 = Main.a(<span class="string">"65544231587a52794d3138316458417a636c396d4e44553343673d3d"</span>);</div><div class="line">    System.out.<span class="built_in">println</span>(v5);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> a(<span class="keyword">String</span> arg4) &#123;</div><div class="line"></div><div class="line">    StringBuilder v1 = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">int</span> v0;</div><div class="line">    <span class="built_in">for</span>(v0 = <span class="number">0</span>; v0 &lt; arg4.length(); v0 += <span class="number">2</span>) &#123;</div><div class="line">        v1.append(((<span class="keyword">char</span>)Integer.<span class="built_in">parseInt</span>(arg4.substring(v0, v0 + <span class="number">2</span>), <span class="number">16</span>)));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">return</span> v1.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
