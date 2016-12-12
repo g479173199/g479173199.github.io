@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,30 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/12/lctf-2016-android100-writeup/">
+        <h2 class="post-title">
+            lctf 2016 android100 writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年lctf中android100的writeup。
+Writeup首先点我下载题目。直接用jeb反编译，发现本题没有涉及到so，都是在Java层进行加密。
+题目简单，所以直接给出解密程序。
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-12
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -355,21 +379,21 @@ MSC_2 writeup首先点我下载题目。本题中的反调试检测都是通过�
 
 <div class="post-preview">
 
-    <a href="/2016/12/05/lctf-2016-android-writeup/">
+    <a href="/2016/12/05/lctf-2016-android200-writeup/">
         <h2 class="post-title">
-            lctf 2016 android writeup
+            lctf 2016 android200 writeup
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            本文为2016年lctf中android的writeup。
+            本文为2016年lctf中android200的writeup。
 Writeup首先点我下载题目。直接用jeb反编译，入口代码如下：
 
-使用IDA反汇编，先看.init_array。在.init_array中看到secret和base码（后面用到的加密算法就是base64算法）。
+使用IDA反汇编，先看init_array。在init_array中看到secret和base码（后面用到的加密算法就是base64算法）。
 JNI_Onload中将form和f0rm进行了对调，所以真正调用的截取字符串的方法是f0rm。
 
-查看checkPa......
+查看checkP......
         </div>
     </a>
     <p class="post-meta">
@@ -430,30 +454,6 @@ Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/02/zctf-2016-android-writeup/">
-        <h2 class="post-title">
-            zctf 2016 android writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年zctf中android的writeup。
-Writeup首先点我下载题目。使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
-
-进行算法还原，用户名是zctf，密码是{Notthis}......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -489,7 +489,7 @@ Writeup首先点我下载题目。使用jeb反编译，对username和password进
                     <div class="tags">
                         
                             
-                            <a href="/tags/#CTF" title="CTF" rel="14">CTF</a>
+                            <a href="/tags/#CTF" title="CTF" rel="15">CTF</a>
                             
                         
                     </div>
