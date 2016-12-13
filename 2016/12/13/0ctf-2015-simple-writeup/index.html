@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          0ctf 2015 simple writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/page/2/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/13/0ctf-2015-simple-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,274 +147,109 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Jieming&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">To Be A Lean Developer!</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                        
+                    </div>
+                    <h1>0ctf 2015 simple writeup</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-12-13
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本文为2015年0ctf中simple的writeup。</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/simple.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
+<p><img src="1.png" alt="1"></p>
+<p>找到<code>flag.txt</code>，但是里面的内容并不是<code>flag</code>。</p>
+<p><img src="2.png" alt="2"></p>
+<p>在smali基础上进行动态调试，调试教程<a href="http://www.w2bc.com/article/121374" target="_blank" rel="external">点我</a>查看。在关键位置下断，查看存放<code>flag</code>的寄存器的值。</p>
+<p><img src="3.png" alt="3"></p>
+<p><img src="4.png" alt="4"></p>
+<p><img src="5.png" alt="5"></p>
+<p><code>flag</code>是<code>0ctf{It&#39;s_More_Than_Meets_The_Eye!}</code>。</p>
 
 
-<div class="post-preview">
+                <hr>
 
-    <a href="/2016/12/03/问鼎杯-2016-android-writeup/">
-        <h2 class="post-title">
-            问鼎杯 2016 android writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年问鼎杯中android的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下：
+                
 
-只有当输入与随机数（每隔一段时间随机数自动变换）相同时才能跳转到MainActivity。在smali中修改程序逻辑：当输入与随机数不同时进行跳转。
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/" data-toggle="tooltip" data-placement="top" title="pragyan-ctf 2015 Fast and Furious writeup">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-分析MainActivity知flag会自动生成并显示在EditText中，不过setTransformatio......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-03
-    </p>
+                
 
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/zctf-2016-android-writeup/">
-        <h2 class="post-title">
-            zctf 2016 android writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年zctf中android的writeup。
-Writeup首先点我下载题目。使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
-
-进行算法还原，用户名是zctf，密码是{Notthis}......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/0ctf-2016-boomshakalaka-writeup/">
-        <h2 class="post-title">
-            0ctf 2016 boomshakalaka writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年0ctf中boomshakalaka的writeup。
-
-boomshakalaka writeup首先点我下载题目。直接用jeb反编译，反编译代码如下：
-
-APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的YmF6aW5nYWFhYQ==为base64编码。多玩几把游戏，游戏结束后......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/2015-MSC-1-writeup/">
-        <h2 class="post-title">
-            2015 MSC_1 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年MSC中第一题的writeup。
-MSC_1 writeup首先点我下载题目。反编译后找到关键方法check。
-
-方法中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。故需忽略此类代码，定位关键代码：从方法出口位置查找方法返回值进行逆推。
-搜索 return,可以得到：
-
-在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/">
-        <h2 class="post-title">
-            su-ctf 2016 Sharif_CTF writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年su-ctf中的Sharif_CTF的writeup。
-Sharif_CTF writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-Build.SERIAL用来检测程序是否在模拟器中运行，IsCorrect函数返回1则校验通过。使用IDA反汇编，结果如下：
-
-strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的AS......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-01
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
-        <h2 class="post-title">
-            alictf 2016 LoopAndLoop writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年alictf中LoopAndLoop的writeup。
-LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
-用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
-
-分析完程序流程后......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-11-29
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/">&larr; Newer Posts</a>
-        </li>
-    
-    
-</ul>
-
-
-
-                <!-- 如果开启评论功能 -->
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#CTF" title="CTF" rel="16">CTF</a>
-                            
+                       
+                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/g479173199.github.io/img/avatar.jpg" />
-                        
-
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/g479173199">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -427,9 +262,66 @@ LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返�
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/13/0ctf-2015-simple-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/13/0ctf-2015-simple-writeup/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
