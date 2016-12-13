@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -195,27 +195,21 @@
 <p>详细教程<a href="http://mp.weixin.qq.com/s?__biz=MzAxMTY5MTEyMQ==&mid=2650305544&idx=1&sn=49c985366bbcb1bb6638213100e55ed4&chksm=83b1e116b4c66800fd74d496423281eb3019f05df4b828ad0445be5f198ccb9663edd2264fab&mpshare=1&scene=23&srcid=11022v8vES03QyRNG0pHXuVJ#rd" target="_blank" rel="external">点我</a>查看，教程已经详细介绍了实现过程中的每个步骤，这里分享下我在实现过程中的几点感悟：</p>
 <ol>
 <li>教程中提供的abootimg工具是在Mac系统下使用，Ubuntu系统直接去Ubuntu Software Center下载安装。</li>
+<li>教程中有个小错误。</li>
 </ol>
-<ol>
-<li><p>教程中有个小错误。</p>
 <p><img src="1.png" alt="1"></p>
-</li>
-</ol>
 <ol>
-<li><p>等AU显示<code>idle</code>后再搜索函数，不然要搜索的函数IDA可能没分析到。</p>
+<li>等AU显示<code>idle</code>后再搜索函数，不然要搜索的函数IDA可能没分析到。</li>
+</ol>
 <p><img src="2.png" alt="2"></p>
-</li>
-</ol>
 <ol>
-<li><p>Nexus 4中<code>aStateSTgidDPid</code>没有<code>DATA XREF</code>，但是可以看到其前后变量都在<code>sub_C0168510</code>，故 <code>aStateSTgidDPid</code>也在<code>sub_C0168510</code>。</p>
+<li>Nexus 4中<code>aStateSTgidDPid</code>没有<code>DATA XREF</code>，但是可以看到其前后变量都在<code>sub_C0168510</code>，故 <code>aStateSTgidDPid</code>也在<code>sub_C0168510</code>。</li>
+</ol>
 <p><img src="4.png" alt="4"></p>
-</li>
-</ol>
 <ol>
-<li><p>教程中用的是Nexus 5，系统为4.4。本人实际操作中用Nexus 4，系统4.4。只要把相应的汇编代码改为下图即可（根据实际修改相应的汇编代码）。</p>
-<p><img src="5.png" alt="5"></p>
-</li>
+<li>教程中用的是Nexus 5，系统为4.4。本人实际操作中用Nexus 4，系统4.4。只要把相应的汇编代码改为下图即可（根据实际修改相应的汇编代码）。</li>
 </ol>
+<p><img src="5.png" alt="5"></p>
 <p>最后送上相应的<a href="/downloads/boot.img">固件</a>一枚。</p>
 
 
