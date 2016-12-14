@@ -191,7 +191,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>逆向时经常要对APP进行动态调试，一般情况下，Nexus 5是运行在user模式下。为了方便对APP进行动态调试，修改系统镜像里的boot.img，将Nexus 5改为debug模式。</p>
+                <p>逆向时经常要对APP进行动态调试，一般情况下，Nexus 5运行在user模式下。为了方便对APP进行动态调试，修改系统镜像里的boot.img，将Nexus 5改为在debug模式下运行。</p>
 <p><strong>1.修改boot.img的实验条件</strong>：</p>
 <p>[手机型号]—Nexus 5</p>
 <p>[操作环境]—Ubuntu 14.04</p>
@@ -201,7 +201,7 @@
 <p><img src="1.png" alt="1"></p>
 <p><img src="2.png" alt="2"></p>
 <p><strong>2.解包boot.img</strong>：</p>
-<p>赋予所有工具权限：</p>
+<p>赋予工具权限：</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gjm1993<span class="variable">@ubuntu</span><span class="symbol">:~/Desktop/</span><span class="number">1</span><span class="variable">$ </span>cd tools/</div><div class="line">gjm1993<span class="variable">@ubuntu</span><span class="symbol">:~/Desktop/</span><span class="number">1</span>/tools<span class="variable">$ </span>chmod <span class="number">777</span> *</div></pre></td></tr></table></figure>
 <p>获取boot.img解包的结果参数：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">gjm1993</span><span class="comment">@ubuntu:~/Desktop/1$ ./tools/unpackbootimg -i boot.img</span></div><div class="line"><span class="keyword">BOARD_KERNEL_CMDLINE </span>console<span class="symbol">=ttyHSL0</span>,<span class="number">115200</span>,n8 <span class="keyword">androidboot.hardware=hammerhead </span>user_debug<span class="number">=31</span> maxcpus<span class="number">=2</span> msm_watchdog_v2.enable<span class="number">=1</span></div><div class="line"><span class="keyword">BOARD_KERNEL_BASE </span><span class="number">00000000</span></div><div class="line"><span class="keyword">BOARD_NAME </span></div><div class="line"><span class="keyword">BOARD_PAGE_SIZE </span><span class="number">2048</span></div><div class="line"><span class="keyword">BOARD_KERNEL_OFFSET </span><span class="number">00008000</span></div><div class="line"><span class="keyword">BOARD_RAMDISK_OFFSET </span><span class="number">02900000</span></div><div class="line"><span class="keyword">BOARD_TAGS_OFFSET </span><span class="number">02700000</span></div></pre></td></tr></table></figure>
@@ -216,14 +216,14 @@
 <p>在boot.img-ramdisk.gz解压后释放的ramdisk下，修改default.prop中的<code>ro.debuggable=0</code>为<code>ro.debuggable=1</code>，使修改后的系统运行在debug模式下。为了打开内核root执行<code>adb root</code>，顺便修改default.prop中的<code>ro.secure=1</code>为<code>ro.secure=0</code>，保存退出。</p>
 <p><img src="4.png" alt="4"></p>
 <p><strong>5.使用mkbootfs生成ramdisk.img</strong></p>
-<p>生成ramdisk.img：</p>
+<p>打包生成ramdisk.img：</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gjm1993<span class="variable">@ubuntu</span><span class="symbol">:~/Desktop/</span><span class="number">1</span><span class="variable">$ </span>./tools/mkbootfs ./ramdisk | gzip &gt; ramdisk.img</div></pre></td></tr></table></figure>
 <p><img src="9.png" alt="9"></p>
 <p><strong>6.使用mkbootimg对解包后的boot.img重打包</strong></p>
 <p>根据步骤2中执行<code>./tools/unpackbootimg -i boot.img</code> 得到的结果参数，构建重打包boot.img的命令。</p>
 <p>执行下面的命令：</p>
 <figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">gjm1993@</span><span class="string">ubuntu:</span>~/<span class="string">Desktop/</span>1$ ./<span class="string">tools/</span><span class="string">mkbootimg </span><span class="built_in">--base</span> <span class="string">0x00000000 </span><span class="built_in">--kernel_offset</span> <span class="string">0x00008000 </span><span class="built_in">--ramdisk_offset</span> <span class="string">0x02900000 </span><span class="built_in">--tags_offset</span> <span class="string">0x02700000 </span><span class="built_in">--cmdline</span> <span class="string">'console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1'</span> <span class="built_in">--kernel</span> <span class="string">boot.</span><span class="string">img-kernel </span><span class="built_in">--ramdisk</span> <span class="string">ramdisk.</span><span class="string">img </span>-o <span class="string">newboot.</span><span class="string">img</span></div></pre></td></tr></table></figure>
-<p>上面命令的的由来（<em>构建命令时千万不能混入中文空格</em>）：</p>
+<p>上面命令的的由来（<em>构建命令时千万不能混入中文空格或中文符号</em>）：</p>
 <p><img src="5.png" alt="5"></p>
 <p>顺利生成newboot.img：</p>
 <p><img src="8.png" alt="8"></p>
