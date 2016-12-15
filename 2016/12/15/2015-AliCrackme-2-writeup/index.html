@@ -13,11 +13,11 @@
 
     <title>
         
-          lctf 2016 android100 writeup - Jieming的博客 | Jieming&#39;s Blog
+          2015 AliCrackme_2 writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/12/lctf-2016-android100-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,11 +168,11 @@
                           <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
-                    <h1>lctf 2016 android100 writeup</h1>
+                    <h1>2015 AliCrackme_2 writeup</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-12
+                        2016-12-15
                     </span>
                 </div>
             </div>
@@ -191,9 +191,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年lctf中android100的writeup。</p>
-<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/easy100.apk">点我</a>下载题目。直接用jeb反编译，发现本题没有涉及到so，都是在Java层进行加密。</p>
-<p>题目简单，所以直接给出<a href="/downloads/easy100.zip">解密程序</a>。</p>
+                <p>本文为2015年阿里安全挑战赛中第二题的writeup。</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/AliCrackme_2.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
+<p><img src="1.png" alt="1"></p>
+<p>IDA反汇编查看<code>Java_com_yaotong_crackme_MainActivity_securityCheck</code>，逻辑简单，静态分析直接找到<code>wojiushidaan</code>，但是输入后发现不对。</p>
+<p><img src="2.png" alt="2"></p>
+<p><img src="3.png" alt="3"></p>
+<p>密码存放在<code>0x4450</code>，在<code>Java_com_yaotong_crackme_MainActivity_securityCheck</code>中没有修改<code>off_628C</code>，说明只可能在<code>init.array</code>或<code>JNI_OnLoad</code>中修改。程序运行后前两者都会执行，这时<code>0x4450</code>存放的密码已被修改好，dump内存即可。</p>
+<p>查看内存中libcrackme.so的地址，起始位置<code>0x74ddc000</code>，大小<code>28672</code>。通过dd命令，将内存里的数据拷贝出来。</p>
+<p><img src="4.png" alt="4"></p>
+<p><img src="5.png" alt="5"></p>
+<p>dd指令参数说明。</p>
+<p><img src="6.png" alt="6"></p>
+<p>打开mem，找到0x4450，密码是<code>aiyou,bucuoo</code>。</p>
+<p><img src="7.png" alt="7"></p>
 
 
                 <hr>
@@ -202,13 +213,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/" data-toggle="tooltip" data-placement="top" title="pragyan-ctf 2015 Fast and Furious writeup">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/" data-toggle="tooltip" data-placement="top" title="ssctf 2016 Seclreg writeup">Next Post &rarr;</a>
+                            <a href="/2016/12/14/修改内核打开系统调试标志/" data-toggle="tooltip" data-placement="top" title="修改内核打开系统调试标志">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -261,8 +268,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/12/lctf-2016-android100-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/12/lctf-2016-android100-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
