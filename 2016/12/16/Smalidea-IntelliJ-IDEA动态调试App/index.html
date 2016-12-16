@@ -13,11 +13,11 @@
 
     <title>
         
-          2015 AliCrackme_2 writeup - Jieming的博客 | Jieming&#39;s Blog
+          Smalidea+IntelliJ IDEA动态调试App - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/Smalidea-IntelliJ-IDEA动态调试App/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                          <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>2015 AliCrackme_2 writeup</h1>
+                    <h1>Smalidea+IntelliJ IDEA动态调试App</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-15
+                        2016-12-16
                     </span>
                 </div>
             </div>
@@ -191,20 +191,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2015年阿里安全挑战赛中第二题的writeup。</p>
-<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/AliCrackme_2.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="1.png" alt="1"></p>
-<p>IDA反汇编查看<code>Java_com_yaotong_crackme_MainActivity_securityCheck</code>，逻辑简单，静态分析直接找到<code>wojiushidaan</code>，但是输入后发现不对。</p>
-<p><img src="2.png" alt="2"></p>
-<p><img src="3.png" alt="3"></p>
-<p>密码存放在<code>0x4450</code>，在<code>Java_com_yaotong_crackme_MainActivity_securityCheck</code>中没有修改<code>off_628C</code>，说明只可能在<code>init.array</code>或<code>JNI_OnLoad</code>中修改。程序运行后前两者都会执行，这时<code>0x4450</code>存放的密码已被修改好，dump内存即可。</p>
-<p>查看内存中libcrackme.so的地址，起始位置<code>0x74ddc000</code>，大小<code>28672</code>。通过dd命令，将内存里的数据拷贝出来。</p>
-<p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p>dd指令参数说明。</p>
-<p><img src="6.png" alt="6"></p>
-<p>打开mem，找到0x4450，密码是<code>aiyou,bucuoo</code>。</p>
-<p><img src="7.png" alt="7"></p>
+                <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>smalidea支持14.1及以上版本的IDEA，Android Studio若是基于14.1或以上版本的IDEA也是支持的。我这里用的是最新版本的IDEA，Android Studio的操作也与之类似。</p>
+<p> <a href="https://bitbucket.org/JesusFreke/smali/downloads?tab=downloads" target="_blank" rel="external">点击</a>下载这三个文件。</p>
+<p><img src="1.jpg" alt="1"></p>
+<h2 id="安装smalidea"><a href="#安装smalidea" class="headerlink" title="安装smalidea"></a>安装smalidea</h2><p>1.打开IDEA，进入设置界面，点击Plugins——Install plugin from disk…——选择下载好的smalidea-0.03.zip。<br>2.重启IDEA。</p>
+<h2 id="baksmali"><a href="#baksmali" class="headerlink" title="baksmali"></a>baksmali</h2><p>使用baksmali反编译apk得到smali代码。</p>
+<p>使用下面命令得到apk的smali代码，在./projects/myapp/src目录下<br><code>java -jar baksmali-2.1.2.jar myapp.apk -o ./projects/myapp/src</code>。</p>
+<p><img src="2.jpg" alt="2"></p>
+<h2 id="创建新的工程并导入smali"><a href="#创建新的工程并导入smali" class="headerlink" title="创建新的工程并导入smali"></a>创建新的工程并导入smali</h2><p>1.Project from Existing Sources… </p>
+<p><img src="3.jpg" alt="3"></p>
+<p>选择工程目录 </p>
+<p><img src="4.jpg" alt="4"></p>
+<p>接着一路Next… </p>
+<p><img src="5.jpg" alt="5"></p>
+<p>2.工程创建成功后，在src目录上右键并选择”Mark Directory As——Sources Root”。 </p>
+<p><img src="6.jpg" alt="6"></p>
+<h2 id="开始调试app"><a href="#开始调试app" class="headerlink" title="开始调试app"></a>开始调试app</h2><p>1.打开DDMS<br>工程创建成功后，发现Android Device Monitor按钮不能点击，因为这不是一个完整的安卓工程，不过可以到Android SDK/tools目录下点击monitor.bat打开DDMS。 </p>
+<p><img src="7.jpg" alt="7"></p>
+<p>2.Run/Debug Configurations<br>创建一个”Remote” debug configuration (Run-&gt;Edit Configurations), 设置Port为8700。 </p>
+<p><img src="8.jpg" alt="8"></p>
+<p>3.在smali代码中需要的地方打上断点。</p>
+<p>4.运行应用，并在DDMS中选中该应用的进程。 </p>
+<p><img src="9.jpg" alt="9"></p>
+<p>5.点击Debug按钮，开始调试。当运行到断点时应用就会被暂停，这时就可以像平时调试应用一样操作。 </p>
+<p><img src="10.jpg" alt="10"></p>
+<h1 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h1><p>这里分享下我在使用期间的几点心得：</p>
+<p>1.在smali中所有的局部变量用v开头，方法顶部的<code>.locals n</code>表示这个方法使用n个局部变量。所有的参数用p开头，局部变量和参数都是从0开始编号。对于非静态方法来说，p0就是对象本身的引用，即this指针。</p>
+<p>2.在通过smali进行动态调试的过程中，对照JEB中的Java源码进行分析，能够更清楚地知道程序的执行流程。</p>
+<p>3.当”单步步入/单步步过“无法跳转到目标行、隔行跳转或无法查看变量和寄存器值时，使用“强制步入”进行调试（下图中红色的步入按键）。</p>
+<p>4.动态调试运行到断点A崩溃的解决方法：（1）把断点A取消，在其上面几行的smali处下断，然后单步执行到A处；（2）重装应用后进行调试。</p>
+<p>5.各按键作用的查看方法如下，Run to Cursor是程序跳转到“当前光标所在行”。</p>
+<p><img src="11.png" alt="11"></p>
+<p>6.一般情况下，程序会开启多线程运行，执行断点时要考虑到断点可能在不同的线程中。</p>
+<p><img src="12.png" alt="12"></p>
 
 
                 <hr>
@@ -213,13 +232,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/16/Smalidea-IntelliJ-IDEA动态调试App/" data-toggle="tooltip" data-placement="top" title="Smalidea+IntelliJ IDEA动态调试App">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/14/修改内核打开系统调试标志/" data-toggle="tooltip" data-placement="top" title="修改内核打开系统调试标志">Next Post &rarr;</a>
+                            <a href="/2016/12/15/2015-AliCrackme-2-writeup/" data-toggle="tooltip" data-placement="top" title="2015 AliCrackme_2 writeup">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -272,8 +287,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/15/2015-AliCrackme-2-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/16/Smalidea-IntelliJ-IDEA动态调试App/";
+    var disqus_url = "http://g479173199.github.io/2016/12/16/Smalidea-IntelliJ-IDEA动态调试App/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
