@@ -13,11 +13,11 @@
 
     <title>
         
-          IDA使用小结（三） - Jieming的博客 | Jieming&#39;s Blog
+          IDA使用小结（四） - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/IDA使用小结（三）/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/IDA使用小结（四）/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,7 +168,7 @@
                           <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>IDA使用小结（三）</h1>
+                    <h1>IDA使用小结（四）</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,23 +191,33 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>现在开始第三期。</p>
-<p>1.动态调试时查看寄存器的值（两种）。</p>
+                <p>现在开始第四期。</p>
+<p>1.IDA的交叉引用：查找函数/变量在其他位置的调用情况。</p>
 <p><img src="1.png" alt="1"></p>
 <p><img src="2.png" alt="2"></p>
-<p>2.Jni函数动态注册源码（下图1-2）和IDA中<code>JNI_OnLoad</code>伪代码（下图3-4）如下，遇到动态注册要能找到so中对应的函数（从<code>RegisterNatives</code>中的<code>gMethods</code>入手）。</p>
+<p>2.遇到下面问题的解决方法：</p>
+<ol>
+<li>暂停调试；</li>
+<li>重新在Modules中点击相应的so，可以查看函数列表；</li>
+<li>在函数中下断；</li>
+<li>恢复调试，运行程序。</li>
+</ol>
 <p><img src="3.png" alt="3"></p>
 <p><img src="4.png" alt="4"></p>
 <p><img src="5.png" alt="5"></p>
 <p><img src="6.png" alt="6"></p>
-<p>3.查看<code>JNI_Onload</code>，动态注册的函数体在函数签名下面。</p>
+<p>3.IDA动态调试可以跟IDEA调试一样，程序跳转到“当前光标所在行”。</p>
 <p><img src="7.png" alt="7"></p>
-<p><img src="6.png" alt="6"></p>
-<p>4.”bind：Address already in use”错误的解决方法。</p>
+<p>4.动态调试时，可以在内存中快速寻址到各寄存器，查看寄存器存放的值。</p>
 <p><img src="8.png" alt="8"></p>
-<p>5.动态调试中按F5出现”Decompilation failure: can not convert to microcode”错误：在函数结尾的函数名上按F5就能看到伪代码。</p>
+<p>5.单步步入<code>unk_74E13CE0</code>报错（下图1-2），遇到”Segmentation violation”错误。</p>
+<p>错误原因：<code>unk_74E13CE0</code>没有被识别成汇编代码（下图3）。</p>
+<p>解决方法：光标放在<code>unk_74E13CE0</code>，按c键将指令转为汇编代码（下图4-5）。</p>
 <p><img src="9.png" alt="9"></p>
 <p><img src="10.png" alt="10"></p>
+<p><img src="11.png" alt="11"></p>
+<p><img src="12.png" alt="12"></p>
+<p><img src="13.png" alt="13"></p>
 
 
                 <hr>
@@ -216,13 +226,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/16/IDA使用小结（四）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（四）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/16/IDA使用小结（二）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（二）">Next Post &rarr;</a>
+                            <a href="/2016/12/16/IDA使用小结（三）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（三）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -275,8 +281,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
-    var disqus_url = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/16/IDA使用小结（四）/";
+    var disqus_url = "http://g479173199.github.io/2016/12/16/IDA使用小结（四）/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

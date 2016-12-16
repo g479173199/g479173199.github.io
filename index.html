@@ -184,6 +184,46 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/16/IDA使用小结（四）/">
+        <h2 class="post-title">
+            IDA使用小结（四）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            现在开始第四期。
+1.IDA的交叉引用：查找函数/变量在其他位置的调用情况。
+
+
+2.遇到下面问题的解决方法：
+
+暂停调试；
+重新在Modules中点击相应的so，可以查看函数列表；
+在函数中下断；
+恢复调试，运行程序。
+
+
+
+
+
+3.IDA动态调试可以跟IDEA调试一样，程序跳转到“当前光标所在行”。
+
+4.动态调试时，可以在内存中快速寻址到各寄存器，查看寄存器存放的值。
+
+5.单步步入u......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/16/IDA使用小结（三）/">
         <h2 class="post-title">
             IDA使用小结（三）
@@ -196,7 +236,7 @@
 1.动态调试时查看寄存器的值（两种）。
 
 
-2.Jni函数动态注册源码（图1-2）和IDA中JNI_OnLoad伪代码（图3-4）如下，遇到动态注册要能找到so中对应的函数（从RegisterNatives中的gMethods入手）。
+2.Jni函数动态注册源码（下图1-2）和IDA中JNI_OnLoad伪代码（下图3-4）如下，遇到动态注册要能找到so中对应的函数（从RegisterNatives中的gMethods入手）。
 
 
 
@@ -204,7 +244,7 @@
 3.查看JNI_Onload，动态注册的函数体在函数签名下面。
 
 
-4.”bind：Address already in use”错......
+4.”bind：Address already in use......
         </div>
     </a>
     <p class="post-meta">
@@ -411,30 +451,6 @@ Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下�
 运行程序发现Toast.makeText()的内容不断变化，并且从代码中没有看出flag存在的迹象。
 给出①的运算过程：
 12345678......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/12/lctf-2016-android100-writeup/">
-        <h2 class="post-title">
-            lctf 2016 android100 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年lctf中android100的writeup。
-Writeup首先点我下载题目。直接用jeb反编译，发现本题没有涉及到so，都是在Java层进行加密。
-题目简单，所以直接给出解密程序。
-...
         </div>
     </a>
     <p class="post-meta">
