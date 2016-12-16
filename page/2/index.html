@@ -184,6 +184,37 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/">
+        <h2 class="post-title">
+            ssctf 2016 Seclreg writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年ssctf中Seclreg的writeup。
+Seclreg writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+
+
+
+
+getResources().getString(2131034119)是为了得到strings.xml中username字符串的值，结果是secl-007，故编号是secl-007。
+
+
+IDA反汇编so，入口函数是Java_com_......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-11
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/11/京津冀挑战赛-2016-sysndhy-writeup/">
         <h2 class="post-title">
             京津冀挑战赛 2016 sysndhy writeup
@@ -409,33 +440,6 @@ Writeup首先点我下载题目。使用jeb反编译，对username和password进
 boomshakalaka writeup首先点我下载题目。直接用jeb反编译，反编译代码如下：
 
 APK初始化时，新建了两个xml文件，分别为flag.xml和CocosdxPrefsfile.xml，并且分别写入字符串，其中flag文件中的YmF6aW5nYWFhYQ==为base64编码。多玩几把游戏，游戏结束后......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/2015-MSC-1-writeup/">
-        <h2 class="post-title">
-            2015 MSC_1 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年MSC中第一题的writeup。
-MSC_1 writeup首先点我下载题目。反编译后找到关键方法check。
-
-方法中代码较多时，一行行扣代码解密虽说可行，但是耗时太长。故需忽略此类代码，定位关键代码：从方法出口位置查找方法返回值进行逆推。
-搜索 return,可以得到：
-
-在这个goto标签下，有一个return v4，而且这个返回的位置唯一。所以，确定v4就是返回的变量......
         </div>
     </a>
     <p class="post-meta">

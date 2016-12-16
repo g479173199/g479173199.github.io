@@ -184,6 +184,39 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/16/IDA使用小结（三）/">
+        <h2 class="post-title">
+            IDA使用小结（三）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            现在开始第三期。
+1.动态调试时查看寄存器的值（两种）。
+
+
+2.Jni函数动态注册源码（图1-2）和IDA的JNI_OnLoad（图3-4）如下，遇到动态注册要能找到相应的函数（从RegisterNatives中的gMethods入手）。
+
+
+
+
+3.查看JNI_Onload，动态注册的函数体在函数签名下面。
+
+
+4.”bind：Address already in use”错误的解决方法......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/16/IDA使用小结（二）/">
         <h2 class="post-title">
             IDA使用小结（二）
@@ -192,7 +225,7 @@
             
         </h3>
         <div class="post-content-preview">
-            现在进入第二期。
+            现在开始第二期。
 1.动态调试时，遇到”Bogus or irresponsive remote server”错误：在adb shell中执行setenforce 0关闭SELinux安全机制（需要root权限）。
 2.有时明明在一个函数中却无法F5，这时候需要先按一下p键，程序会将这段汇编代码作为函数分析，然后再按F5，就能看到伪代码。
 3.IDA动态调试中，若静态分析时下的断点无效，说......
@@ -407,37 +440,6 @@ Writeup首先点我下载题目。直接用jeb反编译，发现本题没有涉�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/">
-        <h2 class="post-title">
-            ssctf 2016 Seclreg writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年ssctf中Seclreg的writeup。
-Seclreg writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-
-
-
-
-getResources().getString(2131034119)是为了得到strings.xml中username字符串的值，结果是secl-007，故编号是secl-007。
-
-
-IDA反汇编so，入口函数是Java_com_......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-11
     </p>
 
 </div>
