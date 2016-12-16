@@ -184,6 +184,35 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/">
+        <h2 class="post-title">
+            pragyan-ctf 2015 Fast and Furious writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2015年pragyan-ctf中Fast and Furious的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+程序逻辑简单，flag只可能存在于①或②，首先对Timer.schedule()分析。
+
+
+运行程序发现Toast.makeText()的内容不断变化，并且从代码中没有看出flag存在的迹象。
+给出①的运算过程：
+12345678......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-12
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/12/lctf-2016-android100-writeup/">
         <h2 class="post-title">
             lctf 2016 android100 writeup
@@ -420,30 +449,6 @@ Writeup首先点我下载题目。直接使用jeb反编译，入口代码如下�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-03
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/02/zctf-2016-android-writeup/">
-        <h2 class="post-title">
-            zctf 2016 android writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年zctf中android的writeup。
-Writeup首先点我下载题目。使用jeb反编译，对username和password进行部分验证后，再将username+password及一个数据库查询结果（动态调试可知查询结果为zctf2016）作为Auth.auth()方法的参数，如果返回值为1则跳转到app页面。
-
-进行算法还原，用户名是zctf，密码是{Notthis}......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-02
     </p>
 
 </div>

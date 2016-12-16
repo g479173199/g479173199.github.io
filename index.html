@@ -184,6 +184,36 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/16/IDA使用小结（五）/">
+        <h2 class="post-title">
+            IDA使用小结（五）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            现在开始第五期。
+1.问题：修改变量的类型报错。解决方法：导入jni.h并添加_JNIEnv结构后再修改。
+
+
+2.问题：静态分析时在armeabi下的so下断，动态调试出现断点处汇编代码不同（下图2的断点对应下图1的断点）或断点处汇编代码是DCB指令（下图3）的情况。
+解决方法：把lib下的armeabi-v7a和x86都删去，只保留armeabi。
+
+
+
+3.伪代码中给出一个十六进制数0......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/16/IDA使用小结（四）/">
         <h2 class="post-title">
             IDA使用小结（四）
@@ -427,35 +457,6 @@ flag是0ctf{It&#39;s_More_Than_Meets_The_Eye!}。
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/">
-        <h2 class="post-title">
-            pragyan-ctf 2015 Fast and Furious writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年pragyan-ctf中Fast and Furious的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-程序逻辑简单，flag只可能存在于①或②，首先对Timer.schedule()分析。
-
-
-运行程序发现Toast.makeText()的内容不断变化，并且从代码中没有看出flag存在的迹象。
-给出①的运算过程：
-12345678......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-12
     </p>
 
 </div>
