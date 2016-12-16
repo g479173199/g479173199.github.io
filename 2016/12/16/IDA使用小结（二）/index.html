@@ -13,11 +13,11 @@
 
     <title>
         
-          Jieming的博客 | Jieming&#39;s Blog
+          IDA使用小结（二） - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/page/3/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/IDA使用小结（二）/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,160 +147,98 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Jieming&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">To Be A Lean Developer!</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
+                        
+                    </div>
+                    <h1>IDA使用小结（二）</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Jieming Gu on
+                        2016-12-16
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>现在进入第二期。</p>
+<p>1.动态调试时，遇到”Bogus or irresponsive remote server”错误：在adb shell中执行<code>setenforce 0</code>关闭SELinux安全机制（需要root权限）。</p>
+<p>2.有时明明在一个函数中却无法F5，这时候需要先按一下p键，程序会将这段汇编代码作为函数分析，然后再按F5，就能看到伪代码。</p>
+<p>3.IDA动态调试中，若静态分析时下的断点无效，说明没有断点存在，需在动态调试期间重新下断。</p>
+<p>4.IDA中变量的存储如下，COMMON_KEY的值为<code>u!~#7@w0</code>。</p>
+<p><img src="D:\Blog\source\_posts\IDA使用小结（二）\1png.png" alt="1png"></p>
+<p>5.通过Pseudocode-A可知变量存放的寄存器：View-A和Pseudocode-A之间按Tab键可在伪代码和汇编代码之间切换定位，切换后在相同的位置。</p>
+<p><img src="D:\Blog\source\_posts\IDA使用小结（二）\2.png" alt="2"></p>
+<p><img src="D:\Blog\source\_posts\IDA使用小结（二）\3.png" alt="3"></p>
 
 
-<div class="post-preview">
+                <hr>
 
-    <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/">
-        <h2 class="post-title">
-            su-ctf 2016 Sharif_CTF writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年su-ctf中的Sharif_CTF的writeup。
-Sharif_CTF writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+                
 
-Build.SERIAL用来检测程序是否在模拟器中运行，IsCorrect函数返回1则校验通过。使用IDA反汇编，结果如下：
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/16/IDA使用小结（一）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（一）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的AS......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-01
-    </p>
+                
 
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
-        <h2 class="post-title">
-            alictf 2016 LoopAndLoop writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年alictf中LoopAndLoop的writeup。
-LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
-用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
-
-分析完程序流程后......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-11-29
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/page/2/">&larr; Newer Posts</a>
-        </li>
-    
-    
-</ul>
-
-
-
-                <!-- 如果开启评论功能 -->
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/g479173199.github.io/img/avatar.jpg" />
-                        
-
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/g479173199">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -313,9 +251,66 @@ LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返�
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/16/IDA使用小结（二）/";
+    var disqus_url = "http://g479173199.github.io/2016/12/16/IDA使用小结（二）/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
