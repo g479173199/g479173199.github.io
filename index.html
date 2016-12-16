@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -181,6 +181,29 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/16/IDA使用小结（一）/">
+        <h2 class="post-title">
+            IDA使用小结（一）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            从本期开始分享我在使用IDA期间遇到的问题 、使用技巧和一些相关知识点，每期有五点，现在开始第一期。
+1.”Debugger –&gt; Attach to Process”出现”Could not connect to localhost: 由于目标计算机积极拒绝，无法连接。Command “ProcessAttach” failed”：在root模式下运行android_server。
+......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-16
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -422,33 +445,6 @@ IDA反汇编so，发现check进行了加密处理。so中没有JNI_Onload，故�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-11
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/10/京津冀挑战赛-2016-possible-writeup/">
-        <h2 class="post-title">
-            京津冀挑战赛 2016 possible writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年京津冀挑战赛中possible的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-
-
-
-在SO层通过反射得到num和indexArray两个数组，当符合一定条件时将answerNum设置成解密密钥，继而进行三重AES解密。符合SO层条件的answerNum会有多个，但是只有一个answerNum能解密密文，其他answerNum解密密文......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-10
     </p>
 
 </div>

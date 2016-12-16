@@ -13,11 +13,11 @@
 
     <title>
         
-          ssctf 2016 Seclreg writeup - Jieming的博客 | Jieming&#39;s Blog
+          Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/page/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,110 +147,134 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
-                        
-                    </div>
-                    <h1>ssctf 2016 Seclreg writeup</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by Jieming Gu on
-                        2016-12-11
-                    </span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Jieming&#39;s Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">To Be A Lean Developer!</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
 
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>本文为2016年ssctf中Seclreg的writeup。</p>
-<h1 id="Seclreg-writeup"><a href="#Seclreg-writeup" class="headerlink" title="Seclreg writeup"></a>Seclreg writeup</h1><p>首先<a href="/downloads/re1-e7e4ad1a.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="1.png" alt="1"></p>
-<p><img src="2.png" alt="2"></p>
-<p><img src="3.png" alt="3"></p>
-<p><img src="6.png" alt="6"></p>
-<p><img src="7.png" alt="7"></p>
-<p><code>getResources().getString(2131034119)</code>是为了得到<code>strings.xml</code>中<code>username</code>字符串的值，结果是<code>secl-007</code>，故编号是<code>secl-007</code>。</p>
-<p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p>IDA反汇编so，入口函数是<code>Java_com_ssctf_seclreg_Seclo0o_getpl</code>，<code>getpl</code>中对输入的密码进行判别。</p>
-<p><img src="8.png" alt="8"></p>
-<p>解题思路：关注的重点放在对输入密码进行的处理和比较上。</p>
-<p><code>getpl</code>没有对传入的密码做任何修改，直接进行比较。定位到最后的比较语句，如下图，发现密码为39位。看ARM指令知<code>pl</code>存放在R0寄存器，<code>inputPass</code>存放在R1寄存器，IDA进行动态调试直接查看<code>pl</code>的值即可。</p>
-<p><img src="9.png" alt="9"></p>
-<p><img src="10.png" alt="10"></p>
-<p>密码：<code>SSCTF{oty3eaP$g986iwhw32j%OJ)g0o7J.CG:}</code></p>
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
 
 
-                <hr>
+<div class="post-preview">
 
-                
+    <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
+        <h2 class="post-title">
+            alictf 2016 LoopAndLoop writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年alictf中LoopAndLoop的writeup。
+LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
+用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
 
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/12/12/lctf-2016-android100-writeup/" data-toggle="tooltip" data-placement="top" title="lctf 2016 android100 writeup">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/12/11/京津冀挑战赛-2016-sysndhy-writeup/" data-toggle="tooltip" data-placement="top" title="京津冀挑战赛 2016 sysndhy writeup">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
+分析完程序流程后......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-11-29
+    </p>
 
-                
+</div>
+<hr>
 
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/page/2/">&larr; Newer Posts</a>
+        </li>
+    
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
                 
 
             </div>
-    <!-- Side Catalog Container -->
-        
-
     <!-- Sidebar Container -->
-
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
                 <!-- Featured Tags -->
                 
 
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+
+                        
+                            <img src="/g479173199.github.io/img/avatar.jpg" />
+                        
+
+                        
+
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            
+
+                            
+
+                            
+
+                            
+                                <li>
+                                    <a target="_blank"  href="https://github.com/g479173199">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+                            
+                            
+                            
+                        </ul>
+                    </div>
+                </section>
+                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -263,66 +287,9 @@
                 </ul>
                 
             </div>
-
-        </div>
+        
     </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
+</div>
 
 
     <!-- Footer -->
