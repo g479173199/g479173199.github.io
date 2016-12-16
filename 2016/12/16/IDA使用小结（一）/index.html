@@ -192,11 +192,11 @@
                 post-container">
 
                 <p>从本期开始分享我在使用IDA期间遇到的问题 、使用技巧和一些相关知识点，每期有五点，现在开始第一期。</p>
-<p>1.”Debugger –&gt; Attach to Process”出现”Could not connect to localhost: 由于目标计算机积极拒绝，无法连接。Command “ProcessAttach” failed”：在root模式下运行android_server。</p>
+<p>1.”Debugger –&gt; Attach to Process”出现”Could not connect to localhost: 由于目标计算机积极拒绝，无法连接。Command “ProcessAttach” failed”：在root模式下运行android_server，重新连接。</p>
 <p>2.选附加进程时，发现只有一个进程：在root模式下运行android_server才能看到手机中的进程。</p>
-<p>3.”Option”-&gt;”General”-&gt;”Number of opcode bytes”填4，这样可以知道每条汇编代码是属于ARM模式还是Thumb模式，这点是修改汇编代码的基础。</p>
+<p>3.”Option –&gt; General –&gt; Number of opcode bytes”填4，这样可以知道每条汇编代码是属于ARM模式还是Thumb模式，这点是修改汇编代码的基础。</p>
 <p>4.开启动态调试后，“Debugger –&gt; Debugger windows –&gt; Module lists”中可查找要调试的so，双击相应的so可以在新的窗口中查看so中各函数，双击函数可以跳转到函数相应的地址。</p>
-<p>5.IDA 6.8能调试5.0系统（IDA版本限制可调试的Android系统版本）。</p>
+<p>5.IDA 6.8能调试Android 5.0（IDA版本限制可调试的Android系统版本）。</p>
 
 
                 <hr>
