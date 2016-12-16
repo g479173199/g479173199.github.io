@@ -196,7 +196,7 @@
 1.动态调试时查看寄存器的值（两种）。
 
 
-2.Jni函数动态注册源码（图1-2）和IDA的JNI_OnLoad（图3-4）如下，遇到动态注册要能找到相应的函数（从RegisterNatives中的gMethods入手）。
+2.Jni函数动态注册源码（图1-2）和IDA中JNI_OnLoad伪代码（图3-4）如下，遇到动态注册要能找到so中对应的函数（从RegisterNatives中的gMethods入手）。
 
 
 
@@ -204,7 +204,7 @@
 3.查看JNI_Onload，动态注册的函数体在函数签名下面。
 
 
-4.”bind：Address already in use”错误的解决方法......
+4.”bind：Address already in use”错......
         </div>
     </a>
     <p class="post-meta">
