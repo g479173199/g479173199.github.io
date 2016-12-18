@@ -13,11 +13,11 @@
 
     <title>
         
-          京津冀挑战赛 2016 PartFour writeup - Jieming的博客 | Jieming&#39;s Blog
+          Android Native反调试-检测TCP端口 - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/18/Android-Native反调试-检测TCP端口/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,10 +165,10 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                          <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>京津冀挑战赛 2016 PartFour writeup</h1>
+                    <h1>Android Native反调试-检测TCP端口</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,20 +191,29 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年京津冀挑战赛中PartFour的writeup。</p>
-<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/PartFour.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="1.png" alt="1"></p>
-<p>IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中我已经总结了相应的查找方法，可以轻松找到<code>check</code>对应<code>_Z5checkP7_JNIEnvP7_jclassP8_jstring</code>。</p>
+                <p>​                                                                                                                                                    <code>&gt;这一处反调试是在调试某加固时遇到的，原理是查看当前所有的TCP连接，如果有&lt;00000000:5D8A&gt;就退出，也就是查看本地的23946端口是否被占用(IDA默认的监听端口)。</code></p>
+<p>实现代码如下：</p>
+<pre><code>void checkAndroidServer() {
+    char szLines[1024] = {0};
+    //监听23946端口
+    FILE *fp = fopen(&quot;/proc/net/tcp&quot;, &quot;r&quot;);
+    if (fp != NULL) {
+        while (fgets(szLines, sizeof(szLines), fp)) {
+            //23946端口
+            if (strstr(szLines, &quot;00000000:5D8A&quot;)) {
+                kill(getpid(), SIGKILL);
+                break;
+            }
+        }
+    fclose(fp);
+    }
+    LOGE(&quot;no find android server&quot;);
+}
+</code></pre><p>启动<code>android_server</code>后查看当前的TCP连接。</p>
 <p><img src="2.png" alt="2"></p>
+<p>解决方法：不使用默认的端口启动<code>android_server</code>，再次输入<code>cat /proc/net/tcp</code>查看结果。</p>
 <p><img src="3.png" alt="3"></p>
-<p>查看<code>_Z5checkP7_JNIEnvP7_jclassP8_jstring</code>的伪代码。</p>
 <p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p><code>check</code>对输入字符串进行字节校验。首先把字符串转为字节数组，然后逐位校验。<code>v11-v22</code>通过<code>memcpy</code>进行初始化赋值，双击<code>v11-v22</code>，可以看到对应的存储地址，根据<code>memcpy</code>的拷贝结果可以推断答案。</p>
-<p><img src="6.png" alt="6"></p>
-<p><img src="7.png" alt="7"></p>
-<p><img src="8.png" alt="8"></p>
-<p>答案是<code>6226001165384796</code>。</p>
 
 
                 <hr>
@@ -213,13 +222,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/18/Android-Native反调试-检测TCP端口/" data-toggle="tooltip" data-placement="top" title="Android Native反调试-检测TCP端口">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/16/IDA使用小结（五）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（五）">Next Post &rarr;</a>
+                            <a href="/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/" data-toggle="tooltip" data-placement="top" title="京津冀挑战赛 2016 PartFour writeup">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -272,8 +277,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/18/Android-Native反调试-检测TCP端口/";
+    var disqus_url = "http://g479173199.github.io/2016/12/18/Android-Native反调试-检测TCP端口/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -184,6 +184,30 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/13/修改内核绕过反调试/">
+        <h2 class="post-title">
+            修改内核绕过反调试
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文是在lcweik大神一文的基础上，使用dd命令来辅助实现内核的提取与刷写，实现手机内核的逆向与二进制修改，从而绕过app程序的反调试。
+详细教程点我查看，教程已经详细介绍了实现过程中的每个步骤，这里分享下我在实现过程中的几点感悟：
+1.教程中提供的abootimg工具是在Mac系统下使用，Ubuntu系统直接去Ubuntu Software Center下载安装。
+2.教程中有个小错误。......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-13
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/13/0ctf-2015-simple-writeup/">
         <h2 class="post-title">
             0ctf 2015 simple writeup
@@ -430,30 +454,6 @@ JNI_Onload中将form和f0rm进行了对调，所以真正调用的截取字符�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-05
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/04/bctf-2016-LostFlower-writeup/">
-        <h2 class="post-title">
-            bctf 2016 LostFlower writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年bctf中LostFlower的writeup。
-LostFlower writeup首先点我下载题目。直接使用jeb反编译，入口代码如下：
-
-首先获取用户输入，然后调用Double.parseDouble将其转为Double类型（输入数据必须为合法的Double数据），接着将其作为参数传递给native层的stringFromJNI。如果返回值为6，则调用stringFro......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-04
     </p>
 
 </div>
