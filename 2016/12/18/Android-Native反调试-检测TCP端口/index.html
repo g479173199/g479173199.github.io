@@ -212,9 +212,9 @@
     }
     LOGE(&quot;no find android server&quot;);
 }
-</code></pre><p>启动<code>android_server</code>后查看当前的TCP连接。</p>
+</code></pre><p>启动<code>android_server</code>，查看当前的TCP连接。</p>
 <p><img src="2.png" alt="2"></p>
-<p>解决方法：不使用默认的端口启动<code>android_server</code>，再次输入<code>cat /proc/net/tcp</code>查看结果。</p>
+<p><strong>解决方法</strong>：不使用默认的端口启动<code>android_server</code>，再次输入<code>cat /proc/net/tcp</code>查看结果。</p>
 <p><img src="3.png" alt="3"></p>
 <p><img src="4.png" alt="4"></p>
 
