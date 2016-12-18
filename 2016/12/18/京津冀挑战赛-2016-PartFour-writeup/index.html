@@ -13,11 +13,11 @@
 
     <title>
         
-          ssctf 2016 Seclreg writeup - Jieming的博客 | Jieming&#39;s Blog
+          京津冀挑战赛 2016 PartFour writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,11 +168,11 @@
                           <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
-                    <h1>ssctf 2016 Seclreg writeup</h1>
+                    <h1>京津冀挑战赛 2016 PartFour writeup</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-11
+                        2016-12-18
                     </span>
                 </div>
             </div>
@@ -191,23 +191,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年ssctf中Seclreg的writeup。</p>
-<h1 id="Seclreg-writeup"><a href="#Seclreg-writeup" class="headerlink" title="Seclreg writeup"></a>Seclreg writeup</h1><p>首先<a href="/downloads/re1-e7e4ad1a.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
+                <p>本文为2016年京津冀挑战赛中PartFour的writeup。</p>
+<h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/PartFour.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
 <p><img src="1.png" alt="1"></p>
+<p>IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中我已经总结了相应的查找方法，可以轻松找到<code>check</code>对应<code>_Z5checkP7_JNIEnvP7_jclassP8_jstring</code>。</p>
 <p><img src="2.png" alt="2"></p>
 <p><img src="3.png" alt="3"></p>
-<p><img src="6.png" alt="6"></p>
-<p><img src="7.png" alt="7"></p>
-<p><code>getResources().getString(2131034119)</code>是为了得到<code>strings.xml</code>中<code>username</code>字符串的值，结果是<code>secl-007</code>，故编号是<code>secl-007</code>。</p>
+<p>查看<code>_Z5checkP7_JNIEnvP7_jclassP8_jstring</code>的伪代码。</p>
 <p><img src="4.png" alt="4"></p>
 <p><img src="5.png" alt="5"></p>
-<p>IDA反汇编so，入口函数是<code>Java_com_ssctf_seclreg_Seclo0o_getpl</code>，<code>getpl</code>中对输入的密码进行判别。</p>
+<p><code>check</code>对输入字符串进行字节校验。首先把字符串转为字节数组，然后逐位校验。<code>v11-v22</code>通过<code>memcpy</code>进行初始化赋值，双击<code>v11-v22</code>，可以看到对应的存储地址，根据<code>memcpy</code>的拷贝结果可以推断答案。</p>
+<p><img src="6.png" alt="6"></p>
+<p><img src="7.png" alt="7"></p>
 <p><img src="8.png" alt="8"></p>
-<p>解题思路：关注的重点放在对输入密码进行的处理和比较上。</p>
-<p><code>getpl</code>没有对传入的密码做任何修改，直接进行比较。定位到最后的比较语句，如下图，发现密码为39位。看ARM指令知<code>pl</code>存放在R0寄存器，<code>inputPass</code>存放在R1寄存器，IDA进行动态调试直接查看<code>pl</code>的值即可。</p>
-<p><img src="9.png" alt="9"></p>
-<p><img src="10.png" alt="10"></p>
-<p>密码：<code>SSCTF{oty3eaP$g986iwhw32j%OJ)g0o7J.CG:}</code></p>
+<p>答案是<code>6226001165384796</code>。</p>
 
 
                 <hr>
@@ -216,13 +213,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/12/lctf-2016-android100-writeup/" data-toggle="tooltip" data-placement="top" title="lctf 2016 android100 writeup">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/11/京津冀挑战赛-2016-sysndhy-writeup/" data-toggle="tooltip" data-placement="top" title="京津冀挑战赛 2016 sysndhy writeup">Next Post &rarr;</a>
+                            <a href="/2016/12/16/IDA使用小结（五）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（五）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -275,8 +268,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/11/ssctf-2016-Seclreg-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
