@@ -13,7 +13,7 @@
 
     <title>
         
-          Android Native反调试-检测TCP端口 - Jieming的博客 | Jieming&#39;s Blog
+          Android Native反调试—检测TCP端口 - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
@@ -168,7 +168,7 @@
                           <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>Android Native反调试-检测TCP端口</h1>
+                    <h1>Android Native反调试—检测TCP端口</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,7 +191,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>​                                                                                                                                                    <code>&gt;这一处反调试是在调试某加固时遇到的，原理是查看当前所有的TCP连接，如果有&lt;00000000:5D8A&gt;就退出，也就是查看本地的23946端口是否被占用(IDA默认的监听端口)。</code></p>
+                <p>​                                                                                                                                                    <code>&gt; 这一处反调试是在调试某加固时遇到的，原理是查看当前所有的TCP连接，如果有&lt;00000000:5D8A&gt;就退出，也就是查看本地的23946端口是否被占用(IDA默认的监听端口)。</code></p>
 <p>实现代码如下：</p>
 <pre><code>void checkAndroidServer() {
     char szLines[1024] = {0};
