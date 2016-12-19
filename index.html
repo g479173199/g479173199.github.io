@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,34 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/19/IDA使用小结（六）/">
+        <h2 class="post-title">
+            IDA使用小结（六）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            现在开始第六期。
+1.动态调试时，直接continue跳转到某行汇编代码收到SIGSEGV信号，调试终止：若不能直接跳转到某一行，采用单步步过的方法绕过限制，一步一步执行到目标行。
+2.有时候动态注册的函数伪代码显示一个传参，实质上有多个传参。把传参改为JNIEnv *env并Force call type后，IDA会重新识别并显示多个传参。
+
+
+
+
+3.有时候静态注册的函数伪代码显示一个传......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-19
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -427,31 +455,6 @@ IDA反汇编查看Java_com_yaotong_crackme_MainActivity_securityCheck，逻辑�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-15
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/14/修改内核打开系统调试标志/">
-        <h2 class="post-title">
-            修改内核打开系统调试标志
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            逆向时经常要对APP进行动态调试，一般情况下，Nexus 5运行在user模式下。为了方便对APP进行动态调试，修改系统镜像里的boot.img，将Nexus 5改为在debug模式下运行。
-1.修改boot.img的实验条件：
-[手机型号]—Nexus 5
-[操作环境]—Ubuntu 14.04
-[手机系统]—Google官方适用于Nexus 5的Android 5.1.1镜像，镜像下载地......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-14
     </p>
 
 </div>

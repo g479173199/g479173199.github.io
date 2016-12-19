@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,31 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/14/修改内核打开系统调试标志/">
+        <h2 class="post-title">
+            修改内核打开系统调试标志
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            逆向时经常要对APP进行动态调试，一般情况下，Nexus 5运行在user模式下。为了方便对APP进行动态调试，修改系统镜像里的boot.img，将Nexus 5改为在debug模式下运行。
+1.修改boot.img的实验条件：
+[手机型号]—Nexus 5
+[操作环境]—Ubuntu 14.04
+[手机系统]—Google官方适用于Nexus 5的Android 5.1.1镜像，镜像下载地......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-14
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -427,33 +452,6 @@ MSC_2 writeup首先点我下载题目。本题中的反调试检测都是通过�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-06
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/05/lctf-2016-android200-writeup/">
-        <h2 class="post-title">
-            lctf 2016 android200 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年lctf中android200的writeup。
-Writeup首先点我下载题目。直接用jeb反编译，入口代码如下：
-
-使用IDA反汇编，先看init_array。在init_array中看到secret和base码（后面用到的加密算法就是base64算法）。
-JNI_Onload中将form和f0rm进行了对调，所以真正调用的截取字符串的方法是f0rm。
-
-查看checkP......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-05
     </p>
 
 </div>

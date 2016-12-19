@@ -13,11 +13,11 @@
 
     <title>
         
-          bctf 2016 LostFlower writeup - Jieming的博客 | Jieming&#39;s Blog
+          IDA使用小结（六） - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/04/bctf-2016-LostFlower-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/19/IDA使用小结（六）/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                          <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>bctf 2016 LostFlower writeup</h1>
+                    <h1>IDA使用小结（六）</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-04
+                        2016-12-19
                     </span>
                 </div>
             </div>
@@ -191,36 +191,21 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年bctf中LostFlower的writeup。</p>
-<h1 id="LostFlower-writeup"><a href="#LostFlower-writeup" class="headerlink" title="LostFlower writeup"></a>LostFlower writeup</h1><p>首先<a href="/downloads/LostFlower.apk">点我</a>下载题目。直接使用jeb反编译，入口代码如下：</p>
-<p><img src="0.png" alt="0"></p>
-<p>首先获取用户输入，然后调用<code>Double.parseDouble</code>将其转为Double类型（输入数据必须为合法的Double数据），接着将其作为参数传递给native层的<code>stringFromJNI</code>。如果返回值为6，则调用<code>stringFromJNI2</code>，返回值即为Flag。<br>使用IDA反汇编查看<code>stringFromJNI</code>，结果如下：</p>
+                <p>现在开始第六期。</p>
+<p>1.动态调试时，直接continue跳转到某行汇编代码收到SIGSEGV信号，调试终止：若不能直接跳转到某一行，采用单步步过的方法绕过限制，一步一步执行到目标行。</p>
+<p>2.有时候动态注册的函数伪代码显示一个传参，实质上有多个传参。把传参改为<code>JNIEnv *env</code>并<code>Force call type</code>后，IDA会重新识别并显示多个传参。</p>
 <p><img src="1.png" alt="1"></p>
-<p>可以看到，SO进行了高强度的混淆，加入了大量while、if等无用指令。<br>对<code>stringFromJNI</code>使用f5，经过对f5伪代码的分析，并没有发现对用户输入进行校验的地方。<em>静态分析解决不了问题，就用动态调试</em>。</p>
-<p>SO没有做任何反调试处理，但是动态调试时，<code>stringFromJNI</code>的f5失效，需要手动处理。遇到问题如下：</p>
 <p><img src="2.png" alt="2"></p>
 <p><img src="3.png" alt="3"></p>
 <p><img src="4.png" alt="4"></p>
-<p>通过对比动态调试和静态分析的汇编代码可知，动态调试时<code>stringFromJNI</code>没有结束地址，故f5失效。解决方法：<em>用鼠标从函数头部一直到函数结尾拖一下，变成灰色，然后按p，这样就可以f5</em>。</p>
-<p>由于汇编代码含有大量的无效跳转，<em>因此我们选择直接在伪代码的基础上进行动态调试，把精力放在函数对输入数据进行的处理上。同时，输入多组不同的数据来了解函数处理流程。</em></p>
-<p>首先对输入数据进行处理的地方是<code>check1</code>，根据返回值是否为1，进入不同的分支。</p>
+<p>3.有时候静态注册的函数伪代码显示一个传参，实质上有多个传参。把传参改为<code>JNIEnv *env</code>并<code>Force call type</code>后，IDA会重新识别并显示多个传参。</p>
 <p><img src="5.png" alt="5"></p>
-<p>分析<code>check1</code>，对<code>check1</code>进行f5得到伪代码（<code>check1</code>也是要手动处理才能得到伪代码）。继续调试，来到关键位置，结果如下：</p>
 <p><img src="6.png" alt="6"></p>
-<p>这里的函数都是一些除法、求余的操作。经过几轮动态调试，这个for循环的前五行代码就是逆向取出输入数据的每一位。举个例子，输入为1234567890，每轮得到的依次是0，9，8，7，6，5，4，3，2，1。</p>
-<p>现在还剩下一个<code>my_pow</code>，顾名思义这是个幂相关的函数。注意我们不需要去具体分析<code>my_pow</code>,因为我们的输入只有0-9这10种可能。几轮测试过后，得到结论：<code>my_pow</code>返回输入数据的十次幂。</p>
-<p>继续调试，来到下一个关键位置：每从输入数据中取一位，<code>v3</code>值加1，这里猜测输入数据应该是10位，即输入数据应大于1000000000。</p>
+<p>4.IDA使用ptrace进行调试，如果程序自身调用ptrace，IDA就无法调试程序。</p>
 <p><img src="7.png" alt="7"></p>
-<p>重新运行程序（新的输入数据大于1000000000），调试到上图位置时强制跳转到<code>v2 = (void *)v4;</code>，继续调试，进入下图所示的分支。</p>
+<p>5.想查看<code>v12</code>，双击<code>v12</code>会跳转到存放位置—<code>0000003C</code>，取<code>0000003C</code>地址存放的值。用这种方法确定<code>v12</code>的存放地址和存放的值。</p>
 <p><img src="8.png" alt="8"></p>
-<p>需要弄清楚<code>sub_1AA4</code>，<code>v14</code>是输入数据，<code>v15</code>是输入数据每一位十次幂的求和，通过分析可知<code>sub_1AA4</code>需返回负数。</p>
-<p><code>sub_1AA4</code>逻辑：如果参数<code>（v14 - v15）</code>为非负数则返回该参数，如果参数为负数则取反后返回。</p>
 <p><img src="9.png" alt="9"></p>
-<p><img src="10.png" alt="10"></p>
-<p>这里遇到一个问题，由上面分析可知，需要<code>sub_1AA4</code>返回负数。但是按照函数逻辑，无论如何都会返回一个非负数。这时看伪代码已经没用了，通过对<code>sub_1AA4</code>的汇编代码的分析，发现了溢出点：<code>NEGS R1, R1</code>。当参数为负数时，程序使用<code>NEGS</code>指令求二进制补码后返回。参数取-2147483648（2^31）时，取其二进制补码发生溢出，参数仍为负数。</p>
-<p>最后给出计算输入的程序：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int pow_table[] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0x400</span>, <span class="number">0xe6a9</span>, <span class="number">0x100000</span>, <span class="number">0x9502f9</span>, <span class="number">0x39aa400</span>, <span class="number">0x10d63af1</span>, <span class="number">0x40000000</span>, <span class="number">0xcfd41b91</span>&#125;;</div><div class="line">        int i;</div><div class="line"></div><div class="line">        for (i = <span class="number">1000000000</span>; i &lt;= <span class="number">2147483647</span>; i++) &#123;</div><div class="line">            int a0 = i % <span class="number">10</span>;</div><div class="line">            int a1 = (i % <span class="number">100</span>) / <span class="number">10</span>;</div><div class="line">            int a2 = (i % <span class="number">1000</span>) / <span class="number">100</span>;</div><div class="line">            int a3 = (i % <span class="number">10000</span>) / <span class="number">1000</span>;</div><div class="line">            int a4 = (i % <span class="number">100000</span>) / <span class="number">10000</span>;</div><div class="line">            int a5 = (i % <span class="number">1000000</span>) / <span class="number">100000</span>;</div><div class="line">            int a6 = (i % <span class="number">10000000</span>) / <span class="number">1000000</span>;</div><div class="line">            int a7 = (i % <span class="number">100000000</span>) / <span class="number">10000000</span>;</div><div class="line">            int a8 = (i % <span class="number">1000000000</span>) / <span class="number">100000000</span>;</div><div class="line">            int a9 = i / <span class="number">1000000000</span>;</div><div class="line"></div><div class="line">            int sum = pow_table[a0] + pow_table[a1] + pow_table[a2] + pow_table[a3] + pow_table[a4] + pow_table[a5] + pow_table[a6] + pow_table[a7] + pow_table[a8] + pow_table[a9];</div><div class="line">            if (i - sum == <span class="number">-2147483648</span>) &#123;</div><div class="line">                System.out.println(i + <span class="string">""</span>);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输入为<code>1422445956</code>，Flag为<code>BCTF{wrhav3f4nwxo}</code>。</p>
 
 
                 <hr>
@@ -229,13 +214,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/05/lctf-2016-android200-writeup/" data-toggle="tooltip" data-placement="top" title="lctf 2016 android200 writeup">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/03/问鼎杯-2016-android-writeup/" data-toggle="tooltip" data-placement="top" title="问鼎杯 2016 android writeup">Next Post &rarr;</a>
+                            <a href="/2016/12/18/Android-Native反调试-检测TCP端口/" data-toggle="tooltip" data-placement="top" title="Android Native反调试—检测TCP端口">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -288,8 +269,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/04/bctf-2016-LostFlower-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/04/bctf-2016-LostFlower-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/19/IDA使用小结（六）/";
+    var disqus_url = "http://g479173199.github.io/2016/12/19/IDA使用小结（六）/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
