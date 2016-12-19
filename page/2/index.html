@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,33 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/15/2015-AliCrackme-2-writeup/">
+        <h2 class="post-title">
+            2015 AliCrackme_2 writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2015年阿里安全挑战赛中第二题的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+IDA反汇编查看Java_com_yaotong_crackme_MainActivity_securityCheck，逻辑简单，静态分析直接找到wojiushidaan，但是输入后发现不对。
+
+
+密码存放在0x4450，在Java_com_yaotong_cra......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-15
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -428,30 +455,6 @@ ill-intentions writeup首先点我下载题目。直接使用jeb反编译，分�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-09
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/06/2015-MSC-2-writeup/">
-        <h2 class="post-title">
-            2015 MSC_2 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年MSC中第二题的writeup。
-MSC_2 writeup首先点我下载题目。本题中的反调试检测都是通过读取/proc/pid/status中TracerPid值来判断是否被调试，如果不为0则退成程序。通过修改Nexus 4手机内核让TracerPid恒为0来绕过反调试，修改内核教程点我查看。
-在Java层有对APK进行签名校验，通过修改smali可以绕过。
-解题思路：把精力......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-06
     </p>
 
 </div>

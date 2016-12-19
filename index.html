@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,34 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/19/Android-Native反调试-检测TracerPid/">
+        <h2 class="post-title">
+            Android Native反调试-检测TracerPid
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            /proc/$pid/status中显示程序的pid等信息，程序正常运行时TracerPid为0。程序被调试后，TracerPid 为正在调试此进程的pid。
+
+
+实现代码如下：
+void be_attached_check(){
+    const int bufsize = 1024;
+    char filename[bufsize];
+    char line[bufsize];......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-19
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -428,33 +456,6 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/15/2015-AliCrackme-2-writeup/">
-        <h2 class="post-title">
-            2015 AliCrackme_2 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年阿里安全挑战赛中第二题的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-IDA反汇编查看Java_com_yaotong_crackme_MainActivity_securityCheck，逻辑简单，静态分析直接找到wojiushidaan，但是输入后发现不对。
-
-
-密码存放在0x4450，在Java_com_yaotong_cra......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-15
     </p>
 
 </div>
