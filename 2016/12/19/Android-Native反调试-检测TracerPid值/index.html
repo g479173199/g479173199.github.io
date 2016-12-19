@@ -221,7 +221,7 @@
 }
 </code></pre><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>以2015年阿里安全挑战赛MSC_2题为例进行说明。</p>
 <p>下图是对<code>TracerPid</code>的检测，从寄存器的值可看出程序被调试时<code>TracerPid</code>不为0，故只要修改<code>TracerPid</code>为0就能调试程序。</p>
-<p>运行到<code>TracerPid</code>的检测，在Hex View中修改<code>v59</code>的数据，将<code>TracerPid</code>后的首位数据修改为<code>0x30</code>（0的ASCII码为<code>0x30</code>，表示程序没有被调试），多余位数修改为<code>0xA</code>（下图中各属性用<code>0xA</code>分隔）。然后跳过此段检测代码，无需单步步过。</p>
+<p>运行到<code>TracerPid</code>的检测，在Hex View中修改<code>v59</code>的数据，将<code>TracerPid</code>后的首位数据修改为<code>0x30</code>（0的ASCII码为<code>0x30</code>，表示程序没有被调试），多余位数修改为<code>0xA</code>（由下图可知各属性用<code>0xA</code>分隔）。然后跳过此段检测代码，无需单步步过。</p>
 <p><img src="3.png" alt="3"></p>
 <p><img src="4.png" alt="4"></p>
 <p><img src="5.png" alt="5"></p>
