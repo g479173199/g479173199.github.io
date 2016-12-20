@@ -13,11 +13,11 @@
 
     <title>
         
-          alictf 2015 Cake writeup - Jieming的博客 | Jieming&#39;s Blog
+          Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/i_dont_wanna_use_default_archives/page/4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,178 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
-                        
-                    </div>
-                    <h1>alictf 2015 Cake writeup</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by Jieming Gu on
-                        2016-12-20
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>本文为2015年alictf中Cake的writeup。</p>
-<h1 id="Cake-writeup"><a href="#Cake-writeup" class="headerlink" title="Cake writeup"></a>Cake writeup</h1><p>首先<a href="/downloads/cake.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
-<p><img src="1.png" alt="1"></p>
-<p><img src="2.png" alt="2"></p>
-<p><img src="3.png" alt="3"></p>
-<p>具体流程：输入一个字符串<code>input</code>，初始化一个长度为16的数组<code>v2</code>，然后<code>input</code>与<code>getKey()</code>返回的<code>v0_1</code>进行异或，结果与<code>v2</code>相同。根据异或的自反性，我们可知<code>input = v2 ^ v0_1</code>。</p>
-<p>值得注意的地方是<code>getkey()</code>返回<code>bobdylan</code>。</p>
-<p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p>计算过程：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">a</span> = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">19</span>, <span class="number">85</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">78</span>, <span class="number">22</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">68</span>, <span class="number">14</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">42</span>]</div><div class="line">b = <span class="string">'bobdylan'</span></div><div class="line">s = <span class="string">''</span></div><div class="line">i = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">a</span>:</div><div class="line">    s+= chr(x ^ ord(b[i % <span class="built_in">len</span>(b)]))</div><div class="line">    i += <span class="number">1</span></div><div class="line">print s</div></pre></td></tr></table></figure>
-<p>答案是<code>blow,in the winD</code>。</p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/12/20/hctf-2015-Andy-writeup/" data-toggle="tooltip" data-placement="top" title="hctf 2015 Andy writeup">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/12/19/Android-Native反调试-检测TracerPid值/" data-toggle="tooltip" data-placement="top" title="Android Native反调试—检测TracerPid值">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
-                    
-                </ul>
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->

@@ -13,11 +13,11 @@
 
     <title>
         
-          alictf 2015 Cake writeup - Jieming的博客 | Jieming&#39;s Blog
+          hctf 2015 Andy writeup - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/20/hctf-2015-Andy-writeup/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,7 +168,7 @@
                           <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
                         
                     </div>
-                    <h1>alictf 2015 Cake writeup</h1>
+                    <h1>hctf 2015 Andy writeup</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
@@ -191,18 +191,16 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2015年alictf中Cake的writeup。</p>
-<h1 id="Cake-writeup"><a href="#Cake-writeup" class="headerlink" title="Cake writeup"></a>Cake writeup</h1><p>首先<a href="/downloads/cake.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
+                <p>本文为2015年hctf中Andy的writeup。</p>
+<h1 id="Andy-writeup"><a href="#Andy-writeup" class="headerlink" title="Andy writeup"></a>Andy writeup</h1><p>首先<a href="/downloads/Andy.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
 <p><img src="1.png" alt="1"></p>
 <p><img src="2.png" alt="2"></p>
 <p><img src="3.png" alt="3"></p>
-<p>具体流程：输入一个字符串<code>input</code>，初始化一个长度为16的数组<code>v2</code>，然后<code>input</code>与<code>getKey()</code>返回的<code>v0_1</code>进行异或，结果与<code>v2</code>相同。根据异或的自反性，我们可知<code>input = v2 ^ v0_1</code>。</p>
-<p>值得注意的地方是<code>getkey()</code>返回<code>bobdylan</code>。</p>
 <p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p>计算过程：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">a</span> = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">19</span>, <span class="number">85</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">78</span>, <span class="number">22</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">68</span>, <span class="number">14</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">42</span>]</div><div class="line">b = <span class="string">'bobdylan'</span></div><div class="line">s = <span class="string">''</span></div><div class="line">i = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">a</span>:</div><div class="line">    s+= chr(x ^ ord(b[i % <span class="built_in">len</span>(b)]))</div><div class="line">    i += <span class="number">1</span></div><div class="line">print s</div></pre></td></tr></table></figure>
-<p>答案是<code>blow,in the winD</code>。</p>
+<p>​                                                         <img src="5.png" alt="5">         </p>
+<p>对输入字符串拼接<code>hdu1s8</code>后反转，然后进行base64编码，最后是一个经典加密。过程可逆：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">SRlhb70YZHKvlTrNrt08F</span>=DX3cdD3txmg</div><div class="line"><span class="attribute">OHMxdWRoZDBpMnczcmRuYXk2bjhkbmEE</span>=</div><div class="line"><span class="number">8</span>s1udhd0i2w3rdnay6n8dna</div><div class="line">and8n6yandr3w2i0d</div></pre></td></tr></table></figure>
+<p> <code>flag</code>是<code>and8n6yandr3w2i0d</code>。</p>
 
 
                 <hr>
@@ -211,13 +209,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/20/hctf-2015-Andy-writeup/" data-toggle="tooltip" data-placement="top" title="hctf 2015 Andy writeup">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/19/Android-Native反调试-检测TracerPid值/" data-toggle="tooltip" data-placement="top" title="Android Native反调试—检测TracerPid值">Next Post &rarr;</a>
+                            <a href="/2016/12/20/alictf-2015-Cake-writeup/" data-toggle="tooltip" data-placement="top" title="alictf 2015 Cake writeup">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -270,8 +264,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/12/20/alictf-2015-Cake-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/20/hctf-2015-Andy-writeup/";
+    var disqus_url = "http://g479173199.github.io/2016/12/20/hctf-2015-Andy-writeup/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

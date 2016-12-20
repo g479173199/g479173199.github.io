@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/page/2/">
+    <link rel="canonical" href="http://g479173199.github.io/page/4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,266 +184,24 @@
 
 <div class="post-preview">
 
-    <a href="/2016/12/16/IDA使用小结（一）/">
+    <a href="/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
         <h2 class="post-title">
-            IDA使用小结（一）
+            alictf 2016 LoopAndLoop writeup
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            从本期开始分享我在使用IDA期间遇到的问题 、使用技巧和一些相关知识点，每期有五点，现在开始第一期。
-1.”Debugger –&gt; Attach to Process”出现”Could not connect to localhost: 由于目标计算机积极拒绝，无法连接。Command “ProcessAttach” failed”：在root模式下运行android_server，重......
+            本文为2016年alictf中LoopAndLoop的writeup。
+LoopAndLoop writeup首先点我下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。
+用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。
+
+分析完程序流程后......
         </div>
     </a>
     <p class="post-meta">
         Posted by Jieming Gu on
-        2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/16/Smalidea+IntelliJ IDEA动态调试App教程和心得/">
-        <h2 class="post-title">
-            Smalidea+IntelliJ IDEA动态调试App教程和心得
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            准备工作smalidea支持14.1及以上版本的IDEA，Android Studio若是基于14.1或以上版本的IDEA也是支持的。我这里用的是最新版本的IDEA，Android Studio的操作也与之类似。
- 点击下载这三个文件。
-
-安装smalidea1.打开IDEA，进入设置界面，点击Plugins——Install plugin from disk…——选择下载好的smalide......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/15/2015-AliCrackme-2-writeup/">
-        <h2 class="post-title">
-            2015 AliCrackme_2 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年阿里安全挑战赛中第二题的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-IDA反汇编查看Java_com_yaotong_crackme_MainActivity_securityCheck，逻辑简单，静态分析直接找到wojiushidaan，但是输入后发现不对。
-
-
-密码存放在0x4450，在Java_com_yaotong_cra......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-15
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/14/修改内核打开系统调试标志/">
-        <h2 class="post-title">
-            修改内核打开系统调试标志
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            逆向时经常要对APP进行动态调试，一般情况下，Nexus 5运行在user模式下。为了方便对APP进行动态调试，修改系统镜像里的boot.img，将Nexus 5改为在debug模式下运行。
-1.修改boot.img的实验条件：
-[手机型号]—Nexus 5
-[操作环境]—Ubuntu 14.04
-[手机系统]—Google官方适用于Nexus 5的Android 5.1.1镜像，镜像下载地......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-14
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/13/修改内核绕过反调试/">
-        <h2 class="post-title">
-            修改内核绕过反调试
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文是在lcweik大神一文的基础上，使用dd命令来辅助实现内核的提取与刷写，实现手机内核的逆向与二进制修改，从而绕过app程序的反调试。
-详细教程点我查看，教程已经详细介绍了实现过程中的每个步骤，这里分享下我在实现过程中的几点感悟：
-1.教程中提供的abootimg工具是在Mac系统下使用，Ubuntu系统直接去Ubuntu Software Center下载安装。
-2.教程中有个小错误。......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/13/0ctf-2015-simple-writeup/">
-        <h2 class="post-title">
-            0ctf 2015 simple writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年0ctf中simple的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-找到flag.txt，但是里面的内容并不是flag。
-
-在smali基础上进行动态调试，调试教程点我查看。在关键位置下断，查看存放flag的寄存器的值。
-
-
-
-flag是0ctf{It&#39;s_More_Than_Meets_The_Eye!}。
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/12/pragyan-ctf-2015-Fast-and-Furious-writeup/">
-        <h2 class="post-title">
-            pragyan-ctf 2015 Fast and Furious writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年pragyan-ctf中Fast and Furious的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-程序逻辑简单，flag只可能存在于①或②，首先对Timer.schedule()分析。
-
-
-运行程序发现Toast.makeText()的内容不断变化，并且从代码中没有看出flag存在的迹象。
-给出①的运算过程：
-12345678......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/12/lctf-2016-android100-writeup/">
-        <h2 class="post-title">
-            lctf 2016 android100 writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年lctf中android100的writeup。
-Writeup首先点我下载题目。直接用jeb反编译，发现本题没有涉及到so，都是在Java层进行加密。
-题目简单，所以直接给出解密程序。
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/">
-        <h2 class="post-title">
-            ssctf 2016 Seclreg writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年ssctf中Seclreg的writeup。
-Seclreg writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-
-
-
-
-getResources().getString(2131034119)是为了得到strings.xml中username字符串的值，结果是secl-007，故编号是secl-007。
-
-
-IDA反汇编so，入口函数是Java_com_......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-11
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/11/京津冀挑战赛-2016-sysndhy-writeup/">
-        <h2 class="post-title">
-            京津冀挑战赛 2016 sysndhy writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年京津冀挑战赛中sysndhy的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-
-Base64.encode(input.getBytes())是对输入进行base64编码。
-IDA反汇编so，发现check进行了加密处理。so中没有JNI_Onload，故只可能在init.array中解密check。
-
-
-
-将init_array的c......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-11
+        2016-11-29
     </p>
 
 </div>
@@ -456,13 +214,9 @@ IDA反汇编so，发现check进行了加密处理。so中没有JNI_Onload，故�
 <ul class="pager">
     
         <li class="previous">
-            <a href="/">&larr; Newer Posts</a>
+            <a href="/page/3/">&larr; Newer Posts</a>
         </li>
     
-    
-        <li class="next">
-            <a href="/page/3/">Older Posts &rarr;</a>
-        </li>
     
 </ul>
 
