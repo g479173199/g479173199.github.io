@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -219,7 +219,7 @@
     } else
         LOGD(&quot;open %s fail...&quot;, filename);
 }
-</code></pre><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>以2015年阿里安全挑战赛MSC_2题为例进行说明。</p>
+</code></pre><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>以2015年阿里安全挑战赛MSC_2题为例进行说明。</p>
 <p>下图是对<code>TracerPid</code>的检测，从寄存器的值可看出程序被调试时<code>TracerPid</code>不为0，故只要修改<code>TracerPid</code>为0就能调试程序。</p>
 <p>运行到<code>TracerPid</code>的检测，在Hex View中修改<code>v59</code>的数据，将<code>TracerPid</code>后的首位数据修改为<code>0x30</code>（0的ASCII码为<code>0x30</code>，表示程序没有被调试），多余位数修改为<code>0xA</code>（由下图可知各属性用<code>0xA</code>分隔）。然后跳过此段检测代码，无需单步步过。</p>
 <p><strong>其他检测字段值的反调试都可以用这种方法来绕过。</strong></p>
@@ -234,6 +234,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/12/20/alictf-2015-Cake-writeup/" data-toggle="tooltip" data-placement="top" title="alictf 2015 Cake writeup">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">

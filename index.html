@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,33 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/20/alictf-2015-Cake-writeup/">
+        <h2 class="post-title">
+            alictf 2015 Cake writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2015年alictf中Cake的writeup。
+Cake writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+
+
+具体流程：输入一个字符串input，初始化一个长度为16的数组v2，然后input与getKey()返回的v0_1进行异或，结果与v2相同。根据异或的自反性，我们可知input = v2 ^ v0_1。
+值得注意的地方是getkey()返回bobdy......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-20
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -427,30 +454,6 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
         <div class="post-content-preview">
             从本期开始分享我在使用IDA期间遇到的问题 、使用技巧和一些相关知识点，每期有五点，现在开始第一期。
 1.”Debugger –&gt; Attach to Process”出现”Could not connect to localhost: 由于目标计算机积极拒绝，无法连接。Command “ProcessAttach” failed”：在root模式下运行android_server，重......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/16/Smalidea+IntelliJ IDEA动态调试App教程和心得/">
-        <h2 class="post-title">
-            Smalidea+IntelliJ IDEA动态调试App教程和心得
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            准备工作smalidea支持14.1及以上版本的IDEA，Android Studio若是基于14.1或以上版本的IDEA也是支持的。我这里用的是最新版本的IDEA，Android Studio的操作也与之类似。
- 点击下载这三个文件。
-
-安装smalidea1.打开IDEA，进入设置界面，点击Plugins——Install plugin from disk…——选择下载好的smalide......
         </div>
     </a>
     <p class="post-meta">
