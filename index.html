@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,37 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/26/google-ctf-2016-little-bobby-application-writeup/">
+        <h2 class="post-title">
+            google-ctf 2016 little-bobby-application writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年google-ctf中little-bobby-application的writeup。
+
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+应用是一个注册/登陆程序，注册后账户密码存储到数据库，登陆时进行验证。在注册过程中看到与flag相关的内容，程序提示通过注入来获取flag。
+继续分析应用找到可疑点：
+
+
+《Android安全攻防实战》中写到：
+
+......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-26
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -437,30 +468,6 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
 
 
 4.”bind：Address already in use......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/16/IDA使用小结（二）/">
-        <h2 class="post-title">
-            IDA使用小结（二）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            现在开始第二期。
-1.动态调试时，遇到”Bogus or irresponsive remote server”错误：在adb shell中执行setenforce 0关闭SELinux安全机制（需要root权限）。
-2.有时明明在一个函数中却无法F5，这时候需要先按一下p键，程序会将这段汇编代码作为函数分析，然后再按F5，就能看到伪代码。
-3.IDA动态调试中，若静态分析时下的断点无效，说......
         </div>
     </a>
     <p class="post-meta">

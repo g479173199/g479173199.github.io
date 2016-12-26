@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,36 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/11/京津冀挑战赛-2016-sysndhy-writeup/">
+        <h2 class="post-title">
+            京津冀挑战赛 2016 sysndhy writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年京津冀挑战赛中sysndhy的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+
+Base64.encode(input.getBytes())是对输入进行base64编码。
+IDA反汇编so，发现check进行了加密处理。so中没有JNI_Onload，故只可能在init.array中解密check。
+
+
+
+将init_array的c......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-11
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -411,32 +441,6 @@ MSC_1 writeup首先点我下载题目。反编译后找到关键方法check。
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/">
-        <h2 class="post-title">
-            su-ctf 2016 Sharif_CTF writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年su-ctf中的Sharif_CTF的writeup。
-Sharif_CTF writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-Build.SERIAL用来检测程序是否在模拟器中运行，IsCorrect函数返回1则校验通过。使用IDA反汇编，结果如下：
-
-strcmp函数比较输入和起始地址为v12的字符串，发现v12-v43相邻。故将v12-v43的AS......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-01
     </p>
 
 </div>
