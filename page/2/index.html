@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,39 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/16/IDA使用小结（三）/">
+        <h2 class="post-title">
+            IDA使用小结（三）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            现在开始第三期。
+1.动态调试时查看寄存器的值（两种）。
+
+
+2.Jni函数动态注册源码（下图1-2）和IDA中JNI_OnLoad伪代码（下图3-4）如下，遇到动态注册要能找到so中对应的函数（从RegisterNatives中的gMethods入手）。
+
+
+
+
+3.查看JNI_Onload，动态注册的函数体在函数签名下面。
+
+
+4.”bind：Address already in use......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-16
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -407,37 +440,6 @@ Writeup首先点我下载题目。直接用jeb反编译，发现本题没有涉�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/11/ssctf-2016-Seclreg-writeup/">
-        <h2 class="post-title">
-            ssctf 2016 Seclreg writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年ssctf中Seclreg的writeup。
-Seclreg writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-
-
-
-
-getResources().getString(2131034119)是为了得到strings.xml中username字符串的值，结果是secl-007，故编号是secl-007。
-
-
-IDA反汇编so，入口函数是Java_com_......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-11
     </p>
 
 </div>

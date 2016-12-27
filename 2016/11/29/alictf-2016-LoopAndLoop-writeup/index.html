@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -192,7 +192,8 @@
                 post-container">
 
                 <p>本文为2016年alictf中LoopAndLoop的writeup。</p>
-<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>首先<a href="/downloads/LoopAndLoop.apk">点我</a>下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。<img src="1.png" alt="check"></p>
+<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>首先<a href="/downloads/LoopAndLoop.apk">点我</a>下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。</p>
+<p><img src="1.png" alt="check"></p>
 <p>用IDA反汇编liblhm.so，F5看伪码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下图所示。</p>
 <p><img src="2.png" alt="2"></p>
 <p>分析完程序流程后，题目的核心问题可归结为<em>s的取值</em>，分以下三种情况：</p>
