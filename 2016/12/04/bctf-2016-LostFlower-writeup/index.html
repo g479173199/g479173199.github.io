@@ -194,7 +194,7 @@
                 <p>本文为2016年bctf中LostFlower的writeup。</p>
 <h1 id="LostFlower-writeup"><a href="#LostFlower-writeup" class="headerlink" title="LostFlower writeup"></a>LostFlower writeup</h1><p>首先<a href="/downloads/LostFlower.apk">点我</a>下载题目。直接使用jeb反编译，入口代码如下：</p>
 <p><img src="0.png" alt="0"></p>
-<p>首先获取用户输入，然后调用<code>Double.parseDouble</code>将其转为Double类型（输入数据必须为合法的Double数据），接着将其作为参数传递给native层的<code>stringFromJNI</code>。如果返回值为6，则调用<code>stringFromJNI2</code>，返回值即为Flag。<br>使用IDA反汇编查看<code>stringFromJNI</code>，结果如下：</p>
+<p>首先获取用户输入，然后调用<code>Double.parseDouble</code>将其转为Double类型（输入数据必须为合法的Double数据），接着将其作为参数传递给native层的<code>stringFromJNI</code>。如果返回值为6，则调用<code>stringFromJNI2</code>，返回值即为<code>flag</code>。<br>使用IDA反汇编查看<code>stringFromJNI</code>，结果如下：</p>
 <p><img src="1.png" alt="1"></p>
 <p>可以看到，SO进行了高强度的混淆，加入了大量while、if等无用指令。<br>对<code>stringFromJNI</code>使用f5，经过对f5伪代码的分析，并没有发现对用户输入进行校验的地方。<em>静态分析解决不了问题，就用动态调试</em>。</p>
 <p>SO没有做任何反调试处理，但是动态调试时，<code>stringFromJNI</code>的f5失效，需要手动处理。遇到问题如下：</p>

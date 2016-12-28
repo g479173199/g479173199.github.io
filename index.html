@@ -184,6 +184,38 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/28/函数无法识别的解决方案/">
+        <h2 class="post-title">
+            函数无法识别的解决方案
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            做BCTF 2016 LostFlower期间，遇到”动态调试中函数无法F5”的问题，分享下原因和解决方法。
+原因先看实际中遇到的问题：
+
+
+IDA提示stringFromJNI没有被解析成函数，并且问题出在地址上。按P键无效，查看函数的结束地址：
+
+
+通过对比发现了问题所在，原因是函数没有终点，下面就该解决问题。
+解决方法把函数的汇编代码全部选中，按P键创建函数，可以F5。
+
+
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-28
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/27/UI-Automator-Viewer——分析View结构/">
         <h2 class="post-title">
             UI Automator Viewer—分析View结构
@@ -418,46 +450,6 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
 
 
 3.伪代码中给出一个十六进制数0......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/16/IDA使用小结（四）/">
-        <h2 class="post-title">
-            IDA使用小结（四）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            现在开始第四期。
-1.IDA的交叉引用：查找函数/变量在其他位置的调用情况。
-
-
-2.遇到下面问题的解决方法：
-
-暂停调试；
-重新在Modules中点击相应的so，可以查看函数列表；
-在函数中下断；
-恢复调试，运行程序。
-
-
-
-
-
-3.IDA动态调试可以跟IDEA调试一样，程序跳转到“当前光标所在行”。
-
-4.动态调试时，可以在内存中快速寻址到各寄存器，查看寄存器存放的值。
-
-5.单步步入u......
         </div>
     </a>
     <p class="post-meta">

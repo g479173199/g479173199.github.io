@@ -13,11 +13,11 @@
 
     <title>
         
-          alictf 2016 LoopAndLoop writeup - Jieming的博客 | Jieming&#39;s Blog
+          函数无法识别的解决方案 - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/11/29/alictf-2016-LoopAndLoop-writeup/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/28/函数无法识别的解决方案/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#CTF" title="CTF">CTF</a>
+                          <a class="tag" href="/tags/#IDA" title="IDA">IDA</a>
                         
                     </div>
-                    <h1>alictf 2016 LoopAndLoop writeup</h1>
+                    <h1>函数无法识别的解决方案</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-11-29
+                        2016-12-28
                     </span>
                 </div>
             </div>
@@ -191,24 +191,17 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>本文为2016年alictf中LoopAndLoop的writeup。</p>
-<h1 id="LoopAndLoop-writeup"><a href="#LoopAndLoop-writeup" class="headerlink" title="LoopAndLoop writeup"></a>LoopAndLoop writeup</h1><p>首先<a href="/downloads/LoopAndLoop.apk">点我</a>下载题目。直接使用jeb反编译，当返回值为1835996258时，程序显示flag，故只需要分析check函数。</p>
-<p><img src="1.png" alt="check"></p>
-<p>用IDA反汇编liblhm.so，F5看伪代码发现有问题：s值不变，chec循环执行check1且永不停止。这时需要看汇编代码，结果如下：</p>
+                <p>做BCTF 2016 LostFlower期间，遇到”动态调试中函数无法F5”的问题，分享下原因和解决方法。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>先看实际中遇到的问题：</p>
+<p><img src="1.png" alt="1"></p>
 <p><img src="2.png" alt="2"></p>
-<p>分析完程序流程后，题目的核心问题可归结为<em>s的取值</em>，分以下三种情况：</p>
-<ol>
-<li>判断何时结束（s’ = s - 1，s’ &lt;= 0）；</li>
-<li>判断是check1、check2或者check3（2 * s % 3）；</li>
-<li>确定checkX传入的s值（chec的s值即上轮checkX的s值）。</li>
-</ol>
-<p><img src="3.png" alt="1"></p>
-<p><img src="4.png" alt="2"></p>
-<p><img src="5.png" alt="3"></p>
-<p>关于s的取值范围我通过动态调试得到s’取值[0,98]，（2）取值[1,99]，（3）取值[0,98]。</p>
-<p>手写几轮即发现运算规律。</p>
-<p><img src="6.png" alt="1"></p>
-<p>程序运行结果是答案：236492408。</p>
+<p>IDA提示<code>stringFromJNI</code>没有被解析成函数，并且问题出在地址上。按P键无效，查看函数的结束地址：</p>
+<p><img src="4.png" alt="4"></p>
+<p><img src="3.png" alt="3"></p>
+<p>通过对比发现了问题所在，<strong>原因是函数没有终点</strong>，下面就该解决问题。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>把函数的汇编代码全部选中，按P键创建函数，可以F5。</p>
+<p><img src="5.png" alt="5"></p>
+<p><img src="6.png" alt="6"></p>
 
 
                 <hr>
@@ -217,10 +210,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/01/su-ctf-2016-Sharif-CTF-writeup/" data-toggle="tooltip" data-placement="top" title="su-ctf 2016 Sharif_CTF writeup">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2016/12/27/UI-Automator-Viewer——分析View结构/" data-toggle="tooltip" data-placement="top" title="UI Automator Viewer—分析View结构">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -272,8 +265,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/11/29/alictf-2016-LoopAndLoop-writeup/";
-    var disqus_url = "http://g479173199.github.io/2016/11/29/alictf-2016-LoopAndLoop-writeup/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/28/函数无法识别的解决方案/";
+    var disqus_url = "http://g479173199.github.io/2016/12/28/函数无法识别的解决方案/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
