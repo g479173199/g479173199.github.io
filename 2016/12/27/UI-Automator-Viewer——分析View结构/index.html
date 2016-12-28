@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -191,15 +191,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>在分析App算法过程中不可避免地接触到控件的点击事件，如果要找到对应的点击事件，就得先找到控件的定义。那么问题来了，如何能够快速地找到控件的定义呢？</p>
-<h2 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h2><p>实验以唯品会的“忘记密码”功能为例，利用UI Automator Viewer进行分析。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>uiautomatorviewer.bat位于SDK目录的tools目录下，点击运行，把设备停在登陆界面，点击左上角圈中的按钮，可以对当前界面进行布局分析，看到以下界面：</p>
+                <p>控件的点击事件作为分析App算法的入口，在逆向中占据举足轻重的地位。如果要找到对应的点击事件，首先要找到控件的定义。那么问题来了，如何能够快速地找到控件的定义呢？</p>
+<h2 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h2><p>实验选取唯品会App，以“忘记密码”功能为例，利用UI Automator Viewer进行分析。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>uiautomatorviewer.bat位于Android SDK/tools目录下，点击运行，把设备停在登陆界面，点击左上角第二个按钮，可以对当前界面进行布局分析，效果如下：</p>
 <p><img src="1.png" alt="1"></p>
-<p>从分析结果可以看出：TextView的id是<code>btn_findpassword</code>。<strong>这个id非常关键</strong>，后面就是用id进行跟踪。下图是登陆界面的详细布局：</p>
+<p>从分析结果可以看出TextView的id是<code>btn_findpassword</code>。<strong>这个id非常关键</strong>，<strong>后面就是用id进行跟踪</strong>。下图是登陆界面的详细布局：</p>
 <p><img src="2.png" alt="2"></p>
-<p>因为有TextView的id，找到对应的id值后可以直接用id值去全局搜索来查找TextView的调用情况。在反编译APK后，APK所有的资源id/id值都会保存在public.xml，public.xml放在values目录下。反编译后的代码中不会用<code>R.id.xxx</code>的形式访问控件，而是用转化之后的id值（十进制），所以先用<code>btn_findpassword</code>去public.xml中找到对应的十六进制id值：</p>
+<p>因为有TextView的id，找到对应的id值后可以用id值进行全局搜索来查找TextView的调用情况。反编译APK后，APK所有的资源id/id值都会保存在public.xml，public.xml放在values目录下。反编译后的代码中不会用<code>R.id.xxx</code>的形式访问控件，而是用转化后的id值（十进制），所以先用<code>btn_findpassword</code>去public.xml中找到对应的十六进制id值：</p>
 <p><img src="3.png" alt="3"></p>
-<p>注意：这里在查找<code>btn_findpassword</code>对应的id值时，发现有多个匹配项，需要用<code>type</code>字段来作区分。<code>type</code>字段有多种取值，例如：<code>layout</code>，<code>drawable</code>，<code>string</code>，<code>attr</code>，<code>id</code>，因为TextView是控件所以取<code>id</code>。</p>
+<p>注意：这里在查找<code>btn_findpassword</code>对应的id值时，发现有多个匹配项，需要用<code>type</code>字段区分。<code>type</code>字段有多种取值，例如：<code>layout</code>，<code>drawable</code>，<code>string</code>，<code>attr</code>，<code>id</code>，因为TextView是控件所以<code>type</code>字段取<code>id</code>。</p>
 <p>直接在Android Killer中全局搜索：</p>
 <p><img src="4.png" alt="4"></p>
 <p>打开Jeb，找到控件对应的点击事件：</p>
@@ -210,9 +210,9 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>逆向过程会发现工作量非常庞大，对于逆向来说非常艰难，还好有一些强大的工具可以快速地定位问题，下面就来总结本文收获的知识。</p>
 <p><strong>对于逆向中想得到的控件点击事件入口，可以通过以下步骤进行：</strong></p>
 <ol>
-<li>使用界面分析工具得到指定控件的id名称</li>
-<li>通过id名称去反编译之后的public.xml中查找相应的id值</li>
-<li>通过Android Killer自带的全局搜索功能，找到控件的调用情况</li>
+<li>使用界面分析工具得到指定控件的id；</li>
+<li>通过id去反编译后的public.xml中查找对应的id值；</li>
+<li>利用Android Killer自带的全局搜索功能，查找控件的调用情况。</li>
 </ol>
 <p>这套方法行之有效，并且普遍适用。</p>
 

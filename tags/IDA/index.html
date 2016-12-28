@@ -13,11 +13,11 @@
 
     <title>
         
-          IDA使用小结（三） - Jieming的博客 | Jieming&#39;s Blog
+          Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/IDA使用小结（三）/">
+    <link rel="canonical" href="http://g479173199.github.io/tags/IDA/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,183 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="http://g479173199.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#IDA" title="IDA">IDA</a>
-                        
-                    </div>
-                    <h1>IDA使用小结（三）</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by Jieming Gu on
-                        2016-12-16
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>现在开始第三期。</p>
-<p>1.动态调试时查看寄存器的值（两种）。</p>
-<p><img src="1.png" alt="1"></p>
-<p><img src="2.png" alt="2"></p>
-<p>2.Jni函数动态注册源码（下图1-2）和IDA中<code>JNI_OnLoad</code>伪代码（下图3-4）如下，遇到动态注册要能找到so中对应的函数（从<code>RegisterNatives</code>中的<code>gMethods</code>入手）。</p>
-<p><img src="3.png" alt="3"></p>
-<p><img src="4.png" alt="4"></p>
-<p><img src="5.png" alt="5"></p>
-<p><img src="6.png" alt="6"></p>
-<p>3.查看<code>JNI_Onload</code>，动态注册的函数体在函数签名下面。</p>
-<p><img src="7.png" alt="7"></p>
-<p><img src="6.png" alt="6"></p>
-<p>4.”bind：Address already in use”错误的解决方法。</p>
-<p><img src="8.png" alt="8"></p>
-<p>5.动态调试中按F5出现”Decompilation failure: can not convert to microcode”错误：在函数结尾的函数名上按F5就能看到伪代码。</p>
-<p><img src="9.png" alt="9"></p>
-<p><img src="10.png" alt="10"></p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/12/16/IDA使用小结（四）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（四）">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/12/16/IDA使用小结（二）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（二）">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="https://linanjun525.github.io/" target="_blank">Nanjun&#39;s Blog</a></li>
-                    
-                </ul>
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
-    var disqus_url = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
