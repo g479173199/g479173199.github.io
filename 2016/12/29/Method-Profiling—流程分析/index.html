@@ -13,11 +13,11 @@
 
     <title>
         
-          IDA使用小结（三） - Jieming的博客 | Jieming&#39;s Blog
+          Method Profiling—流程分析 - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/IDA使用小结（三）/">
+    <link rel="canonical" href="http://g479173199.github.io/2016/12/29/Method-Profiling—流程分析/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#IDA" title="IDA">IDA</a>
+                          <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>IDA使用小结（三）</h1>
+                    <h1>Method Profiling—流程分析</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-16
+                        2016-12-29
                     </span>
                 </div>
             </div>
@@ -191,23 +191,28 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>现在开始第三期。</p>
-<p>1.动态调试时查看寄存器的值（两种）。</p>
+                <p>Windows平台上大名鼎鼎的Ollydbg调试器有一个trace功能，其作用是在执行程序时记录下每个被调用的API名称，分析人员只需查看API的调用序列即可知道这段代码的具体用途。这个功能非常强大，DDMS中也提供了类似的调试方法—Method Profiling（方法剖析）。</p>
+<h2 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h2><p>实验选取唯品会App，以“忘记密码”功能为例，利用Method Profiling进行分析。</p>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="（1）第一种使用方法"><a href="#（1）第一种使用方法" class="headerlink" title="（1）第一种使用方法"></a>（1）第一种使用方法</h3><p>在DDMS的Devices窗口中选择com.achievo.vipshop程序，点击Devices旁边工具栏上的”Start Method Profiling”按钮开启Method Profiling。</p>
 <p><img src="1.png" alt="1"></p>
+<p>此时”Start Method Profiling”按钮的提示文字变成”Stop Method Profiling”，在登陆界面点击“忘记密码”，程序跳转到下个界面后点击”Stop Method Profiling”停止Method Profiling。稍等片刻，会自动弹出TraceView窗口。</p>
 <p><img src="2.png" alt="2"></p>
-<p>2.Jni函数动态注册源码（下图1-2）和IDA中<code>JNI_OnLoad</code>伪代码（下图3-4）如下，遇到动态注册要能找到so中对应的函数（从<code>RegisterNatives</code>中的<code>gMethods</code>入手）。</p>
+<p>TraceView窗口Name一栏中显示的方法调用就是需要关注的地方，每一个方法调用都有一个数字编号，不同的方法调用采用不同的颜色区分，点击方法调用左边的加号展开任意一个方法调用都会看到其下有Parents和Children两个子项，Parents表示该方法被哪个方法调用，Children表示该方法调用了哪些方法。所有的方法调用都以链表的形式依次显示，从上往下查看调用情况。</p>
 <p><img src="3.png" alt="3"></p>
+<p><strong>然而底部的find功能无法使用</strong>。在DDMS中不能使用find功能，需找到相应的trace文件后用<strong>traceview.bat</strong>打开。</p>
 <p><img src="4.png" alt="4"></p>
+<p>Method Profiling生成的trace文件地址如下：</p>
 <p><img src="5.png" alt="5"></p>
-<p><img src="6.png" alt="6"></p>
-<p>3.查看<code>JNI_Onload</code>，动态注册的函数体在函数签名下面。</p>
-<p><img src="7.png" alt="7"></p>
-<p><img src="6.png" alt="6"></p>
-<p>4.”bind：Address already in use”错误的解决方法。</p>
-<p><img src="8.png" alt="8"></p>
-<p>5.动态调试中按F5出现”Decompilation failure: can not convert to microcode”错误：在函数结尾的函数名上按F5就能看到伪代码。</p>
-<p><img src="9.png" alt="9"></p>
-<p><img src="10.png" alt="10"></p>
+<h3 id="（2）第二种使用方法"><a href="#（2）第二种使用方法" class="headerlink" title="（2）第二种使用方法"></a>（2）第二种使用方法</h3><p>除了使用DDMS外还可以手动注入代码，<strong>在想要跟踪的代码片段之间注入，可以精确到方法。</strong></p>
+<p><code>android.os.Debug</code>提供<code>startMethodTracing()</code>和<code>stopMethodTracing()</code>两个方法来开启与关闭Method Profiling，示例如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">android</span><span class="selector-class">.os</span><span class="selector-class">.Debug</span><span class="selector-class">.startMethodTracing</span>("<span class="selector-tag">record</span>");</div><div class="line"><span class="selector-tag">a</span>();</div><div class="line"><span class="selector-tag">android</span><span class="selector-class">.os</span><span class="selector-class">.Debug</span><span class="selector-class">.stopMethodTracing</span>();</div></pre></td></tr></table></figure>
+<p>record为trace文件名，上面的代码执行后会在SD卡的根目录下生成record.trace（App需要添加SD卡写入权限），record.trace包含<code>a()</code>执行过程中所有的方法调用与CPU占用时间等信息，接下来的分析过程相同。</p>
+<p><code>startMethodTracing()</code>的smali代码：</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const-string v0, <span class="string">"record"</span><span class="built_in"></span></div><div class="line">invoke-static &#123;v0&#125;, <span class="class">Landroid/os/Debug;</span>-&gt;startMethodTracing(<span class="class">Ljava/lang/String;</span>)V</div></pre></td></tr></table></figure>
+<p><code>stopMethodTracing()</code>的smali代码：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">invoke-<span class="class">static </span>&#123;&#125;, Landroid<span class="meta-keyword">/os/</span>Debug;-&gt;stopMethodTracing()V</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Method Profiling功能强大，会记录Android系统底层API的调用情况，这点导致记录的数据量非常庞大，增大分析难度，<strong>要善用find功能</strong>。</p>
+<p>实际工作中，需要结合多种方法对App进行逆向分析。</p>
 
 
                 <hr>
@@ -216,13 +221,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/16/IDA使用小结（四）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（四）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/16/IDA使用小结（二）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（二）">Next Post &rarr;</a>
+                            <a href="/2016/12/28/函数无法识别的解决方法/" data-toggle="tooltip" data-placement="top" title="函数无法识别的解决方法">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -275,8 +276,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
-    var disqus_url = "http://g479173199.github.io/2016/12/16/IDA使用小结（三）/";
+    var disqus_identifier = "http://g479173199.github.io/2016/12/29/Method-Profiling—流程分析/";
+    var disqus_url = "http://g479173199.github.io/2016/12/29/Method-Profiling—流程分析/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

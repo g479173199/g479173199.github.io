@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,29 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/12/29/Method-Profiling—流程分析/">
+        <h2 class="post-title">
+            Method Profiling—流程分析
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Windows平台上大名鼎鼎的Ollydbg调试器有一个trace功能，其作用是在执行程序时记录下每个被调用的API名称，分析人员只需查看API的调用序列即可知道这段代码的具体用途。这个功能非常强大，DDMS中也提供了类似的调试方法—Method Profiling（方法剖析）。
+实验说明实验选取唯品会App，以“忘记密码”功能为例，利用Method Profiling进行分析。
+实验步骤（......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-29
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -422,36 +445,6 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-18
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/16/IDA使用小结（五）/">
-        <h2 class="post-title">
-            IDA使用小结（五）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            现在开始第五期。
-1.问题：修改变量的类型报错。解决方法：导入jni.h并添加_JNIEnv结构后再修改。
-
-
-2.问题：静态分析时在armeabi下的so下断，动态调试出现断点处汇编代码不同（下图2的断点对应下图1的断点）或断点处汇编代码是DCB指令（下图3）的情况。
-解决方法：把lib下的armeabi-v7a和x86都删去，只保留armeabi。
-
-
-
-3.伪代码中给出一个十六进制数0......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-16
     </p>
 
 </div>
