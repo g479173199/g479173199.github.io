@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -192,7 +192,9 @@
                 post-container">
 
                 <p>本文为2016年google-ctf中little-bobby-application的writeup。</p>
-<p><img src="1.png" alt="1"></p>
+<blockquote>
+<p>Find the vulnerability, develop an exploit, and when you’re ready, submit your APK to <a href="https://bottle-brush-tree.ctfcompetition.com/" target="_blank" rel="external">https://bottle-brush-tree.ctfcompetition.com</a>. Can take up to 15 minutes to return the result.</p>
+</blockquote>
 <h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><p>首先<a href="/downloads/little-bobby-application/BobbyApplication_CTF.apk">点我</a>下载题目。直接使用jeb反编译，关键代码如下：</p>
 <p><img src="2.png" alt="2"></p>
 <p>应用是一个注册/登陆程序，注册后账户密码存储到数据库，登陆时进行验证。在注册过程中看到与<code>flag</code>相关的内容，程序提示通过注入来获取<code>flag</code>。</p>
