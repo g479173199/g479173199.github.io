@@ -184,6 +184,33 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/">
+        <h2 class="post-title">
+            京津冀挑战赛 2016 PartFour writeup
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文为2016年京津冀挑战赛中PartFour的writeup。
+Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
+
+IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中我已经总结了相应的查找方法，可以轻松找到check对应_Z5checkP7_JNIEnvP7_jclassP8_jstring。
+
+
+查看_Z5checkP7_JNIEnvP7_jclassP8_......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2016-12-18
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/16/IDA使用小结（五）/">
         <h2 class="post-title">
             IDA使用小结（五）
@@ -431,37 +458,6 @@ IDA反汇编查看Java_com_yaotong_crackme_MainActivity_securityCheck，逻辑�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/13/0ctf-2015-simple-writeup/">
-        <h2 class="post-title">
-            0ctf 2015 simple writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2015年0ctf中simple的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-找到flag.txt，但是里面的内容并不是flag。
-
-在smali基础上进行动态调试，调试教程点我查看。在关键位置下断，查看存放flag的寄存器的值。
-
-
-
-flag是0ctf{It&#39;s_More_Than_Meets_The_Eye!}。
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-13
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -581,7 +577,7 @@ flag是0ctf{It&#39;s_More_Than_Meets_The_Eye!}。
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Jieming&#39;s Blog 2016 
+                    Copyright &copy; Jieming&#39;s Blog 2017 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

@@ -13,11 +13,11 @@
 
     <title>
         
-          Smalidea+IntelliJ IDEA动态调试App教程和心得 - Jieming的博客 | Jieming&#39;s Blog
+          Android反调试笔记 - Jieming的博客 | Jieming&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://g479173199.github.io/2016/12/16/Smalidea+IntelliJ IDEA动态调试App教程和心得/">
+    <link rel="canonical" href="http://g479173199.github.io/2017/01/04/Android反调试笔记/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,11 +168,11 @@
                           <a class="tag" href="/tags/#移动安全" title="移动安全">移动安全</a>
                         
                     </div>
-                    <h1>Smalidea+IntelliJ IDEA动态调试App教程和心得</h1>
+                    <h1>Android反调试笔记</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Jieming Gu on
-                        2016-12-16
+                        2017-01-04
                     </span>
                 </div>
             </div>
@@ -191,38 +191,78 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>smalidea支持14.1及以上版本的IDEA，Android Studio若是基于14.1或以上版本的IDEA也是支持的。我这里用的是最新版本的IDEA，Android Studio的操作也与之类似。</p>
-<p> <a href="https://bitbucket.org/JesusFreke/smali/downloads?tab=downloads" target="_blank" rel="external">点击</a>下载这三个文件。</p>
-<p><img src="1.jpg" alt="1"></p>
-<h2 id="安装smalidea"><a href="#安装smalidea" class="headerlink" title="安装smalidea"></a>安装smalidea</h2><p>1.打开IDEA，进入设置界面，点击Plugins——Install plugin from disk…——选择下载好的smalidea-0.03.zip。<br>2.重启IDEA。</p>
-<h2 id="baksmali"><a href="#baksmali" class="headerlink" title="baksmali"></a>baksmali</h2><p>使用baksmali反编译apk得到smali代码。</p>
-<p>使用下面命令得到apk的smali代码，在./projects/myapp/src目录下<br><code>java -jar baksmali-2.1.2.jar myapp.apk -o ./projects/myapp/src</code>。</p>
-<p><img src="2.jpg" alt="2"></p>
-<h2 id="创建新的工程并导入smali"><a href="#创建新的工程并导入smali" class="headerlink" title="创建新的工程并导入smali"></a>创建新的工程并导入smali</h2><p>1.Project from Existing Sources… </p>
-<p><img src="3.jpg" alt="3"></p>
-<p>选择工程目录 </p>
-<p><img src="4.jpg" alt="4"></p>
-<p>接着一路Next… </p>
-<p><img src="5.jpg" alt="5"></p>
-<p>2.工程创建成功后，在src目录上右键并选择”Mark Directory As——Sources Root”。 </p>
-<p><img src="6.jpg" alt="6"></p>
-<h2 id="开始调试app"><a href="#开始调试app" class="headerlink" title="开始调试app"></a>开始调试app</h2><p>1.打开DDMS<br>到Android SDK/tools目录下点击monitor.bat打开DDMS。 </p>
-<p>2.Run/Debug Configurations<br>创建一个”Remote” debug configuration (Run-&gt;Edit Configurations), 设置Port为8700。 </p>
-<p><img src="8.jpg" alt="8"></p>
-<p>3.在smali代码中需要的地方打上断点。</p>
-<p>4.运行应用，并在DDMS中选中该应用的进程。 </p>
-<p><img src="9.jpg" alt="9"></p>
-<p>5.点击Debug按钮，开始调试。当运行到断点时应用就会被暂停，这时就可以像平时调试应用一样操作。 </p>
-<p><img src="10.jpg" alt="10"></p>
-<h1 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h1><p>这里分享下我在使用期间的几点心得：</p>
-<p>1.在smali中所有的局部变量用v开头，方法顶部的<code>.locals n</code>表示这个方法使用n个局部变量。所有的参数用p开头，局部变量和参数都是从0开始编号。对于非静态方法来说，p0就是对象本身的引用，即this指针。</p>
-<p>2.在通过smali进行动态调试的过程中，对照JEB中的Java源码进行分析，能够更清楚地知道程序的执行流程。</p>
-<p>3.当”单步步入/单步步过“无法跳转到目标行、隔行跳转或无法查看变量和寄存器值时，使用“强制步入”进行调试（下图中红色的步入按键）。</p>
-<p>4.动态调试运行到断点A崩溃的解决方法：（1）把断点A取消，在其上面几行的smali处下断，然后单步执行到A处；（2）重装应用后进行调试。</p>
-<p>5.各按键作用的查看方法如下，Run to Cursor是程序跳转到“当前光标所在行”。</p>
-<p><img src="11.png" alt="11"></p>
-<p>6.一般情况下，程序会开启多线程运行，执行断点时要考虑到断点可能在不同的线程中。</p>
-<p><img src="12.png" alt="12"></p>
+                <p>Android反调试常常出现在<code>init.array</code>和<code>JNI_Onload</code>中。除了反调试外，应用还可能在上述两个地方初始化变量。</p>
+<h2 id="1）代码执行时间检测"><a href="#1）代码执行时间检测" class="headerlink" title="1）代码执行时间检测"></a>1）代码执行时间检测</h2><p>读取系统时间，检测关键代码执行耗时。类似函数：<code>time</code>，<code>gettimeofday</code>。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">time_t <span class="built_in">t1</span>, <span class="built_in">t2</span><span class="comment">;</span></div><div class="line">time (&amp;<span class="built_in">t1</span>)<span class="comment">;</span></div><div class="line"><span class="comment">/* Parts of Important Codes */</span></div><div class="line">time (&amp;<span class="built_in">t2</span>)<span class="comment">;</span></div><div class="line">if (<span class="built_in">t2</span> - <span class="built_in">t1</span> &gt; <span class="number">2</span>) &#123;</div><div class="line">    puts (<span class="string">"debugged"</span>)<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2）运行环境检测"><a href="#2）运行环境检测" class="headerlink" title="2）运行环境检测"></a>2）运行环境检测</h2><p>进程的状态信息能通过procfs系统反馈给用户空间，调试会使进程状态发生变化。</p>
+<ol>
+<li>TCP端口/android_server检测</li>
+<li>读取<code>/proc/%d/wchan</code>：<code>ep_poll</code>表示未调试，<code>ptrace_stop</code>表示调试状态</li>
+<li>读取<code>/proc/pid/status</code>：State属性值<code>T</code>表示调试状态，TracerPid属性值表示正在调试此进程的<code>pid</code>。非调试情况下State为<code>S</code>或<code>R</code>， TracerPid为<code>0</code></li>
+</ol>
+<h2 id="3）ptrace"><a href="#3）ptrace" class="headerlink" title="3）ptrace"></a>3）ptrace</h2><p><code>ptrace()</code>是Linux的系统调用，也是IDA等调试器实现的基础。它提供了一个进程跟踪另一个进程寄存器、内存等的能力，一个进程只能被一个进程<code>ptrace()</code>。</p>
+<ol>
+<li><code>ptrace()</code>应用自身</li>
+<li><code>fork()</code>子进程相互<code>ptrace()</code></li>
+</ol>
+<p>使用形式：</p>
+<ol>
+<li><code>ptrace(PTRACE_TRACEME, 0, 0, 0)</code></li>
+<li><code>syscall(__NR_ptrace, 0, 0, 0)</code></li>
+</ol>
+<p>简单的反调试会直接调用<code>ptrace()</code>，只需在进程被<code>ptrace()</code>前让调试器挂载即可；有的反调试会根据<code>ptrace()</code>的返回值（0表示成功）来做进一步的处理。</p>
+<h2 id="4）模拟器检测"><a href="#4）模拟器检测" class="headerlink" title="4）模拟器检测"></a>4）模拟器检测</h2><p>用户层行为和数据检测、模拟器特有属性值，以及模拟器体系结构特征。</p>
+<ol>
+<li>电池状态和电流、模拟器默认电话号码检测，检测设备IDS是不是<code>000000000000000</code>、imsi id是不是<code>310260000000000</code>，手机运营商等</li>
+<li>API Demo，Dev tool：一般模拟器上才有的应用</li>
+<li>读取/system/build.prop文件</li>
+<li>检查模拟器特有文件：/dev/socket/qemud、/dev/qemu_pipe、/sysrtem/bin/qemud、/dev/qemu_pipe、/dev/qemu_trace等</li>
+</ol>
+<h2 id="5）断点检测"><a href="#5）断点检测" class="headerlink" title="5）断点检测"></a>5）断点检测</h2><p>ARM程序下断点，调试器完成两件事：</p>
+<ol>
+<li>保存目标地址处指令</li>
+<li>将目标地址处指令替换成断点指令</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令集</th>
+<th style="text-align:center">指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ARM</td>
+<td style="text-align:center">0x01, 0x00, 0x9f, 0xef</td>
+</tr>
+<tr>
+<td style="text-align:center">Thumb</td>
+<td style="text-align:center">0x01,0xde</td>
+</tr>
+</tbody>
+</table>
+<p>当命中断点时，系统产生SIGTRAP信号，调试器收到信号后完成下面操作：</p>
+<ol>
+<li>恢复断点处原指令</li>
+<li>回退被跟踪进程的当前PC</li>
+</ol>
+<p>这时控制权回到被调试程序，正好执行断点位置指令。这就是ARM平台断点的基本原理。</p>
+<p>断点指令会替换内存中原有指令，因此通过检测内存中的断点指令，可以检测调试：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkBreakPoint</span> <span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> base, offset, pheader;</div><div class="line">    Elf32_Ehdr *elfhdr;</div><div class="line">    Elf32_Phdr *<span class="keyword">ph_t</span>;</div><div class="line"></div><div class="line">    base = getLibAddr (<span class="string">"libdemo.so"</span>);</div><div class="line">    <span class="keyword">if</span> (base == <span class="number">0</span>) &#123;</div><div class="line">        LOGI (<span class="string">"getLibAddr failed"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    elfhdr = (Elf32_Ehdr *) base;</div><div class="line">    pheader = base + elfhdr-&gt;e_phoff;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; elfhdr-&gt;e_phnum; i++) &#123;</div><div class="line">        <span class="keyword">ph_t</span> = (Elf32_Phdr*)(pheader + i * <span class="keyword">sizeof</span>(Elf32_Phdr)); <span class="comment">// traverse program header</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> ( !(<span class="keyword">ph_t</span>-&gt;p_flags &amp; <span class="number">1</span>) ) <span class="keyword">continue</span>;</div><div class="line">        offset = base + <span class="keyword">ph_t</span>-&gt;p_vaddr;</div><div class="line">        offset += <span class="keyword">sizeof</span>(Elf32_Ehdr) + <span class="keyword">sizeof</span>(Elf32_Phdr) * elfhdr-&gt;e_phnum;</div><div class="line"></div><div class="line">        <span class="keyword">char</span> *p = (<span class="keyword">char</span>*)offset;</div><div class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="keyword">ph_t</span>-&gt;p_memsz; j++) &#123;</div><div class="line">            <span class="keyword">if</span>(*p == <span class="number">0x01</span> &amp;&amp; *(p+<span class="number">1</span>) == <span class="number">0xde</span>) &#123;</div><div class="line">                LOGI (<span class="string">"Find thumb bpt %p"</span>, p);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*p == <span class="number">0xf0</span> &amp;&amp; *(p+<span class="number">1</span>) == <span class="number">0xf7</span> &amp;&amp; *(p+<span class="number">2</span>) == <span class="number">0x00</span> &amp;&amp; *(p+<span class="number">3</span>) == <span class="number">0xa0</span>) &#123;</div><div class="line">                LOGI (<span class="string">"Find thumb2 bpt %p"</span>, p);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*p == <span class="number">0x01</span> &amp;&amp; *(p+<span class="number">1</span>) == <span class="number">0x00</span> &amp;&amp; *(p+<span class="number">2</span>) == <span class="number">0x9f</span> &amp;&amp; *(p+<span class="number">3</span>) == <span class="number">0xef</span>) &#123;</div><div class="line">                LOGI (<span class="string">"Find arm bpt %p"</span>, p);</div><div class="line">            &#125;</div><div class="line">            p++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6）inotify文件系统监控"><a href="#6）inotify文件系统监控" class="headerlink" title="6）inotify文件系统监控"></a>6）inotify文件系统监控</h2><p>inotify是内核用于通知用户态文件系统变化的机制，当文件被访问、修改、删除等时，用户态可以快速感知。</p>
+<p>1.调用<code>inotify_init()</code>初始化实例并返回文件描述符，每个文件描述符关联一个事件队列：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">int fd</span> = inotify_init();</div></pre></td></tr></table></figure>
+<p>2.拿到这个文件描述符后告诉内核，哪些文件发生哪些事件时需要通知。通过<code>inotify_add_watch()</code>实现：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">int wd</span> = inotify_add_watch(fd, path, mask);</div></pre></td></tr></table></figure>
+<p><code>fd</code>是文件描述符，<code>path</code>表示监控项的目标路径（可以是文件目录等）。<code>mask</code>表示关注事件的掩码，例如：<code>IN_ACCESS</code>代表访问，<code>IN_MODIFY</code>代表修改等。</p>
+<p>与之对应，可以通过<code>inotify_rm_watch()</code>来删除一个watch：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">int ret</span> = inotify_rm_watch(fd, wd);</div></pre></td></tr></table></figure>
+<p>每当监视的文件发生变化时，内核便给<code>fd</code>关联的事件队列里面塞一个文件事件。文件事件用<code>inotify_event</code> 结构表示，可以通过<code>read()</code>来读取：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">inotify_event</span></span> &#123;</div><div class="line">        __s32           wd;             <span class="comment">/* watch descriptor */</span></div><div class="line">        __<span class="keyword">u32</span>           mask;           <span class="comment">/* watch mask */</span></div><div class="line">        __<span class="keyword">u32</span>           cookie;         <span class="comment">/* cookie to synchronize two events */</span></div><div class="line">        __<span class="keyword">u32</span>           len;            <span class="comment">/* length (including nulls) of name */</span></div><div class="line">        <span class="keyword">char</span>            name[<span class="number">0</span>];        <span class="comment">/* stub for possible name */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size_t <span class="built_in">len</span> = read(fd, buf, <span class="built_in">LEN</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>通过监视<code>/proc/pid/maps</code>文件的打开事件，可防针对360加固的dump脱壳。</p>
+</blockquote>
 
 
                 <hr>
@@ -231,13 +271,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/12/16/IDA使用小结（一）/" data-toggle="tooltip" data-placement="top" title="IDA使用小结（一）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/12/15/2015-AliCrackme-2-writeup/" data-toggle="tooltip" data-placement="top" title="2015 AliCrackme_2 writeup">Next Post &rarr;</a>
+                            <a href="/2016/12/29/Method-Profiling—流程分析/" data-toggle="tooltip" data-placement="top" title="Method Profiling—流程分析">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -290,8 +326,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "http://g479173199.github.io/2016/12/16/Smalidea+IntelliJ IDEA动态调试App教程和心得/";
-    var disqus_url = "http://g479173199.github.io/2016/12/16/Smalidea+IntelliJ IDEA动态调试App教程和心得/";
+    var disqus_identifier = "http://g479173199.github.io/2017/01/04/Android反调试笔记/";
+    var disqus_url = "http://g479173199.github.io/2017/01/04/Android反调试笔记/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

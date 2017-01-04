@@ -184,6 +184,29 @@
 
 <div class="post-preview">
 
+    <a href="/2017/01/04/Android反调试笔记/">
+        <h2 class="post-title">
+            Android反调试笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Android反调试常常出现在init.array和JNI_Onload中。除了反调试外，应用还可能在上述两个地方初始化变量。
+1）代码执行时间检测读取系统时间，检测关键代码执行耗时。类似函数：time，gettimeofday。
+1234567time_t t1, t2;time (&amp;t1);/* Parts of Important Codes */time (&amp;t2);......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2017-01-04
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/29/Method-Profiling—流程分析/">
         <h2 class="post-title">
             Method Profiling—流程分析
@@ -415,33 +438,6 @@ void be_attached_check(){
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/18/京津冀挑战赛-2016-PartFour-writeup/">
-        <h2 class="post-title">
-            京津冀挑战赛 2016 PartFour writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本文为2016年京津冀挑战赛中PartFour的writeup。
-Writeup首先点我下载题目。直接使用jeb反编译，关键代码如下：
-
-IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中我已经总结了相应的查找方法，可以轻松找到check对应_Z5checkP7_JNIEnvP7_jclassP8_jstring。
-
-
-查看_Z5checkP7_JNIEnvP7_jclassP8_......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-18
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -557,7 +553,7 @@ IDA反汇编发现程序采用动态注册。“IDA使用小结（三）”中�
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Jieming&#39;s Blog 2016 
+                    Copyright &copy; Jieming&#39;s Blog 2017 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
