@@ -195,9 +195,9 @@
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1.点击IDA菜单项“File-&gt;Load file-&gt;Parse C header file” 选择jni.h，导入的时候IDA可能会报错，<strong>解决办法很简单：</strong>把要导入的文件备份下，然后哪里报错删哪里。</p>
 <p>2.导入完成后，点击主界面上的“Structures”选项卡，按Insert键打开“Create structure/union”对话框，点击”Add standard structure”按钮，插入这下图中两个结构体。</p>
 <p><img src="1.png" alt="1"></p>
-<p>3.打开<code>JNI_OnLoad()</code>，为了 更好地阅读伪代码，在<code>JNI_OnLoad()</code>中修改变量声明。注意：<code>_JavaVM</code>和<code>_JNIEnv</code>都是指针。</p>
+<p>3.打开<code>JNI_OnLoad()</code>，为了 更好地阅读伪代码，在<code>JNI_OnLoad()</code>中修改变量声明（N：变量重命名；Y：变量类型重定义）。注意：<code>_JavaVM</code>和<code>_JNIEnv</code>都是指针。</p>
 <p><img src="2.png" alt="2"></p>
-<p>4.修改变量后在函数上右键，点击”Force call type”后转为函数调用。</p>
+<p>4.修改完成后在函数上右键，点击”Force call type”，转为函数调用。</p>
 <p><img src="3.png" alt="3"></p>
 
 
