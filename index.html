@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,29 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2017/02/25/导入jni-h解析/">
+        <h2 class="post-title">
+            导入jni.h解析
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            需求IDA 导入C/C++头文件后，添加头文件中的结构体，使用结构体中的函数替换伪代码中的偏移，使函数可读性更好，本文以JNI_OnLoad()为例讲解。
+步骤1.点击IDA菜单项“File-&gt;Load file-&gt;Parse C header file” 选择jni.h，导入的时候IDA可能会报错，解决办法很简单：把要导入的文件备份下，然后哪里报错删哪里。
+2.导入完成后，点击......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Jieming Gu on
+        2017-02-25
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -410,29 +433,6 @@ void be_attached_check(){
     <p class="post-meta">
         Posted by Jieming Gu on
         2016-12-19
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/18/Android-Native反调试-检测TCP端口/">
-        <h2 class="post-title">
-            Android Native反调试—检测TCP端口
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            ​                                                                                                                                                  
-
-这一处反调试是在调试某加固时遇到的，原理是查看当前所有的TCP连接，如果有就退出，也就是查看本地......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Jieming Gu on
-        2016-12-18
     </p>
 
 </div>
